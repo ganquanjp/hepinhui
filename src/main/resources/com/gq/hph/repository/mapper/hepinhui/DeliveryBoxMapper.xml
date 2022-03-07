@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gq.hph.repository.mapper.hepinhui.DeliveryBoxMapper">
+  <resultMap id="BaseResultMap" type="com.gq.hph.repository.hepinhui.DeliveryBox">
+    <id column="delivery_date" jdbcType="DATE" property="deliveryDate" />
+    <id column="box_id" jdbcType="CHAR" property="boxId" />
+    <result column="box_weight" jdbcType="NUMERIC" property="boxWeight" />
+    <result column="weight_unit_id" jdbcType="CHAR" property="weightUnitId" />
+    <result column="express_company_id" jdbcType="CHAR" property="expressCompanyId" />
+    <result column="express_fee_jpn" jdbcType="NUMERIC" property="expressFeeJpn" />
+    <result column="express_back_fee_jpn" jdbcType="NUMERIC" property="expressBackFeeJpn" />
+    <result column="status_id" jdbcType="CHAR" property="statusId" />
+    <result column="delivery_ticket_id" jdbcType="CHAR" property="deliveryTicketId" />
+    <result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
+    <result column="receiver_address" jdbcType="VARCHAR" property="receiverAddress" />
+    <result column="receiver_phone" jdbcType="CHAR" property="receiverPhone" />
+    <result column="delivery_ticket_photo" jdbcType="CHAR" property="deliveryTicketPhoto" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    delivery_date, box_id, box_weight, weight_unit_id, express_company_id, express_fee_jpn, 
+    express_back_fee_jpn, status_id, delivery_ticket_id, receiver_name, receiver_address, 
+    receiver_phone, delivery_ticket_photo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hepinhui.delivery_box
+    where delivery_date = #{deliveryDate,jdbcType=DATE}
+      and box_id = #{boxId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from hepinhui.delivery_box
+    where delivery_date = #{deliveryDate,jdbcType=DATE}
+      and box_id = #{boxId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gq.hph.repository.hepinhui.DeliveryBox">
+    insert into hepinhui.delivery_box (delivery_date, box_id, box_weight, 
+      weight_unit_id, express_company_id, express_fee_jpn, 
+      express_back_fee_jpn, status_id, delivery_ticket_id, 
+      receiver_name, receiver_address, receiver_phone, 
+      delivery_ticket_photo)
+    values (#{deliveryDate,jdbcType=DATE}, #{boxId,jdbcType=CHAR}, #{boxWeight,jdbcType=NUMERIC}, 
+      #{weightUnitId,jdbcType=CHAR}, #{expressCompanyId,jdbcType=CHAR}, #{expressFeeJpn,jdbcType=NUMERIC}, 
+      #{expressBackFeeJpn,jdbcType=NUMERIC}, #{statusId,jdbcType=CHAR}, #{deliveryTicketId,jdbcType=CHAR}, 
+      #{receiverName,jdbcType=VARCHAR}, #{receiverAddress,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=CHAR}, 
+      #{deliveryTicketPhoto,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gq.hph.repository.hepinhui.DeliveryBox">
+    insert into hepinhui.delivery_box
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deliveryDate != null">
+        delivery_date,
+      </if>
+      <if test="boxId != null">
+        box_id,
+      </if>
+      <if test="boxWeight != null">
+        box_weight,
+      </if>
+      <if test="weightUnitId != null">
+        weight_unit_id,
+      </if>
+      <if test="expressCompanyId != null">
+        express_company_id,
+      </if>
+      <if test="expressFeeJpn != null">
+        express_fee_jpn,
+      </if>
+      <if test="expressBackFeeJpn != null">
+        express_back_fee_jpn,
+      </if>
+      <if test="statusId != null">
+        status_id,
+      </if>
+      <if test="deliveryTicketId != null">
+        delivery_ticket_id,
+      </if>
+      <if test="receiverName != null">
+        receiver_name,
+      </if>
+      <if test="receiverAddress != null">
+        receiver_address,
+      </if>
+      <if test="receiverPhone != null">
+        receiver_phone,
+      </if>
+      <if test="deliveryTicketPhoto != null">
+        delivery_ticket_photo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deliveryDate != null">
+        #{deliveryDate,jdbcType=DATE},
+      </if>
+      <if test="boxId != null">
+        #{boxId,jdbcType=CHAR},
+      </if>
+      <if test="boxWeight != null">
+        #{boxWeight,jdbcType=NUMERIC},
+      </if>
+      <if test="weightUnitId != null">
+        #{weightUnitId,jdbcType=CHAR},
+      </if>
+      <if test="expressCompanyId != null">
+        #{expressCompanyId,jdbcType=CHAR},
+      </if>
+      <if test="expressFeeJpn != null">
+        #{expressFeeJpn,jdbcType=NUMERIC},
+      </if>
+      <if test="expressBackFeeJpn != null">
+        #{expressBackFeeJpn,jdbcType=NUMERIC},
+      </if>
+      <if test="statusId != null">
+        #{statusId,jdbcType=CHAR},
+      </if>
+      <if test="deliveryTicketId != null">
+        #{deliveryTicketId,jdbcType=CHAR},
+      </if>
+      <if test="receiverName != null">
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverAddress != null">
+        #{receiverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null">
+        #{receiverPhone,jdbcType=CHAR},
+      </if>
+      <if test="deliveryTicketPhoto != null">
+        #{deliveryTicketPhoto,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gq.hph.repository.hepinhui.DeliveryBox">
+    update hepinhui.delivery_box
+    <set>
+      <if test="boxWeight != null">
+        box_weight = #{boxWeight,jdbcType=NUMERIC},
+      </if>
+      <if test="weightUnitId != null">
+        weight_unit_id = #{weightUnitId,jdbcType=CHAR},
+      </if>
+      <if test="expressCompanyId != null">
+        express_company_id = #{expressCompanyId,jdbcType=CHAR},
+      </if>
+      <if test="expressFeeJpn != null">
+        express_fee_jpn = #{expressFeeJpn,jdbcType=NUMERIC},
+      </if>
+      <if test="expressBackFeeJpn != null">
+        express_back_fee_jpn = #{expressBackFeeJpn,jdbcType=NUMERIC},
+      </if>
+      <if test="statusId != null">
+        status_id = #{statusId,jdbcType=CHAR},
+      </if>
+      <if test="deliveryTicketId != null">
+        delivery_ticket_id = #{deliveryTicketId,jdbcType=CHAR},
+      </if>
+      <if test="receiverName != null">
+        receiver_name = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverAddress != null">
+        receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null">
+        receiver_phone = #{receiverPhone,jdbcType=CHAR},
+      </if>
+      <if test="deliveryTicketPhoto != null">
+        delivery_ticket_photo = #{deliveryTicketPhoto,jdbcType=CHAR},
+      </if>
+    </set>
+    where delivery_date = #{deliveryDate,jdbcType=DATE}
+      and box_id = #{boxId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gq.hph.repository.hepinhui.DeliveryBox">
+    update hepinhui.delivery_box
+    set box_weight = #{boxWeight,jdbcType=NUMERIC},
+      weight_unit_id = #{weightUnitId,jdbcType=CHAR},
+      express_company_id = #{expressCompanyId,jdbcType=CHAR},
+      express_fee_jpn = #{expressFeeJpn,jdbcType=NUMERIC},
+      express_back_fee_jpn = #{expressBackFeeJpn,jdbcType=NUMERIC},
+      status_id = #{statusId,jdbcType=CHAR},
+      delivery_ticket_id = #{deliveryTicketId,jdbcType=CHAR},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      receiver_phone = #{receiverPhone,jdbcType=CHAR},
+      delivery_ticket_photo = #{deliveryTicketPhoto,jdbcType=CHAR}
+    where delivery_date = #{deliveryDate,jdbcType=DATE}
+      and box_id = #{boxId,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gq.hph.repository.mapper.hepinhui.DeliveryDetailMapper">
+  <resultMap id="BaseResultMap" type="com.gq.hph.repository.hepinhui.DeliveryDetail">
+    <id column="delivery_date" jdbcType="DATE" property="deliveryDate" />
+    <id column="box_id" jdbcType="CHAR" property="boxId" />
+    <id column="bar_code" jdbcType="CHAR" property="barCode" />
+    <result column="quantity" jdbcType="NUMERIC" property="quantity" />
+    <result column="price_jpn" jdbcType="NUMERIC" property="priceJpn" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    delivery_date, box_id, bar_code, quantity, price_jpn
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hepinhui.delivery_detail
+    where delivery_date = #{deliveryDate,jdbcType=DATE}
+      and box_id = #{boxId,jdbcType=CHAR}
+      and bar_code = #{barCode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from hepinhui.delivery_detail
+    where delivery_date = #{deliveryDate,jdbcType=DATE}
+      and box_id = #{boxId,jdbcType=CHAR}
+      and bar_code = #{barCode,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gq.hph.repository.hepinhui.DeliveryDetail">
+    insert into hepinhui.delivery_detail (delivery_date, box_id, bar_code, 
+      quantity, price_jpn)
+    values (#{deliveryDate,jdbcType=DATE}, #{boxId,jdbcType=CHAR}, #{barCode,jdbcType=CHAR}, 
+      #{quantity,jdbcType=NUMERIC}, #{priceJpn,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gq.hph.repository.hepinhui.DeliveryDetail">
+    insert into hepinhui.delivery_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deliveryDate != null">
+        delivery_date,
+      </if>
+      <if test="boxId != null">
+        box_id,
+      </if>
+      <if test="barCode != null">
+        bar_code,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="priceJpn != null">
+        price_jpn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deliveryDate != null">
+        #{deliveryDate,jdbcType=DATE},
+      </if>
+      <if test="boxId != null">
+        #{boxId,jdbcType=CHAR},
+      </if>
+      <if test="barCode != null">
+        #{barCode,jdbcType=CHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=NUMERIC},
+      </if>
+      <if test="priceJpn != null">
+        #{priceJpn,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gq.hph.repository.hepinhui.DeliveryDetail">
+    update hepinhui.delivery_detail
+    <set>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=NUMERIC},
+      </if>
+      <if test="priceJpn != null">
+        price_jpn = #{priceJpn,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where delivery_date = #{deliveryDate,jdbcType=DATE}
+      and box_id = #{boxId,jdbcType=CHAR}
+      and bar_code = #{barCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gq.hph.repository.hepinhui.DeliveryDetail">
+    update hepinhui.delivery_detail
+    set quantity = #{quantity,jdbcType=NUMERIC},
+      price_jpn = #{priceJpn,jdbcType=NUMERIC}
+    where delivery_date = #{deliveryDate,jdbcType=DATE}
+      and box_id = #{boxId,jdbcType=CHAR}
+      and bar_code = #{barCode,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,10 +1,10 @@
-package <com.gq.template>;
+package com.gq.hph;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class <Template>ApplicationTests {
+class HphApplicationTests {
 
 	@Test
 	void contextLoads() {

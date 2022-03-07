@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gq.hph.repository.mapper.hepinhui.MstProviderMapper">
+  <resultMap id="BaseResultMap" type="com.gq.hph.repository.hepinhui.MstProvider">
+    <id column="platform_id" jdbcType="CHAR" property="platformId" />
+    <id column="store_id" jdbcType="CHAR" property="storeId" />
+    <result column="platform_name" jdbcType="VARCHAR" property="platformName" />
+    <result column="store_name" jdbcType="VARCHAR" property="storeName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    platform_id, store_id, platform_name, store_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hepinhui.mst_provider
+    where platform_id = #{platformId,jdbcType=CHAR}
+      and store_id = #{storeId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from hepinhui.mst_provider
+    where platform_id = #{platformId,jdbcType=CHAR}
+      and store_id = #{storeId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gq.hph.repository.hepinhui.MstProvider">
+    insert into hepinhui.mst_provider (platform_id, store_id, platform_name, 
+      store_name)
+    values (#{platformId,jdbcType=CHAR}, #{storeId,jdbcType=CHAR}, #{platformName,jdbcType=VARCHAR}, 
+      #{storeName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gq.hph.repository.hepinhui.MstProvider">
+    insert into hepinhui.mst_provider
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="platformId != null">
+        platform_id,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="platformName != null">
+        platform_name,
+      </if>
+      <if test="storeName != null">
+        store_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="platformId != null">
+        #{platformId,jdbcType=CHAR},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=CHAR},
+      </if>
+      <if test="platformName != null">
+        #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gq.hph.repository.hepinhui.MstProvider">
+    update hepinhui.mst_provider
+    <set>
+      <if test="platformName != null">
+        platform_name = #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where platform_id = #{platformId,jdbcType=CHAR}
+      and store_id = #{storeId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gq.hph.repository.hepinhui.MstProvider">
+    update hepinhui.mst_provider
+    set platform_name = #{platformName,jdbcType=VARCHAR},
+      store_name = #{storeName,jdbcType=VARCHAR}
+    where platform_id = #{platformId,jdbcType=CHAR}
+      and store_id = #{storeId,jdbcType=CHAR}
+  </update>
+</mapper>

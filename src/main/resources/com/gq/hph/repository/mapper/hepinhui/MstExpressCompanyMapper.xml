@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gq.hph.repository.mapper.hepinhui.MstExpressCompanyMapper">
+  <resultMap id="BaseResultMap" type="com.gq.hph.repository.hepinhui.MstExpressCompany">
+    <id column="express_company_id" jdbcType="CHAR" property="expressCompanyId" />
+    <result column="express_company_name" jdbcType="VARCHAR" property="expressCompanyName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    express_company_id, express_company_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hepinhui.mst_express_company
+    where express_company_id = #{expressCompanyId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hepinhui.mst_express_company
+    where express_company_id = #{expressCompanyId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gq.hph.repository.hepinhui.MstExpressCompany">
+    insert into hepinhui.mst_express_company (express_company_id, express_company_name
+      )
+    values (#{expressCompanyId,jdbcType=CHAR}, #{expressCompanyName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gq.hph.repository.hepinhui.MstExpressCompany">
+    insert into hepinhui.mst_express_company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="expressCompanyId != null">
+        express_company_id,
+      </if>
+      <if test="expressCompanyName != null">
+        express_company_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="expressCompanyId != null">
+        #{expressCompanyId,jdbcType=CHAR},
+      </if>
+      <if test="expressCompanyName != null">
+        #{expressCompanyName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gq.hph.repository.hepinhui.MstExpressCompany">
+    update hepinhui.mst_express_company
+    <set>
+      <if test="expressCompanyName != null">
+        express_company_name = #{expressCompanyName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where express_company_id = #{expressCompanyId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gq.hph.repository.hepinhui.MstExpressCompany">
+    update hepinhui.mst_express_company
+    set express_company_name = #{expressCompanyName,jdbcType=VARCHAR}
+    where express_company_id = #{expressCompanyId,jdbcType=CHAR}
+  </update>
+</mapper>

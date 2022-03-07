@@ -1,4 +1,4 @@
-package <com.gq.template>.controller;
+package com.gq.hph.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

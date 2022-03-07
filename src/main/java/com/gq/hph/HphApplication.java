@@ -1,15 +1,15 @@
-package <com.gq.template>;
+package com.gq.hph;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("<com.gq.template>.repository.mapper")
-public class <Template>Application {
+@MapperScan("com.gq.hph.repository.mapper")
+public class HphApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(<Template>Application.class, args);
+		SpringApplication.run(HphApplication.class, args);
 	}
 
 }
