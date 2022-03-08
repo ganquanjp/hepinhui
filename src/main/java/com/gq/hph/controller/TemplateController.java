@@ -8,7 +8,6 @@ public class TemplateController {
 
     @GetMapping(value = "/sample")
     public String sample() {
-        // System.out.println("sample is succeslly!");
-        return "This is test!!!!! SampleController is succeslly!";
+        return "This is test for Developer!!!!! SampleController is succeslly!";
     }
 }
