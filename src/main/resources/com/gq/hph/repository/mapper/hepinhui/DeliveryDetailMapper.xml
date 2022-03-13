@@ -11,6 +11,11 @@
   <sql id="Base_Column_List">
     delivery_date, box_id, bar_code, quantity, price_jpn
   </sql>
+  <select id="selectAll" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hepinhui.delivery_detail
+  </select>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

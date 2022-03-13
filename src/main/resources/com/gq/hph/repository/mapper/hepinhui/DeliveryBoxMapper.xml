@@ -21,6 +21,11 @@
     express_back_fee_jpn, status_id, delivery_ticket_id, receiver_name, receiver_address, 
     receiver_phone, delivery_ticket_photo
   </sql>
+  <select id="selectAll" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hepinhui.delivery_box
+  </select>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

@@ -2,6 +2,7 @@ package com.gq.hph.repository.mapper.hepinhui;
 
 import com.gq.hph.repository.hepinhui.DeliveryBox;
 import java.util.Date;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface DeliveryBoxMapper {
@@ -16,4 +17,5 @@ public interface DeliveryBoxMapper {
     int updateByPrimaryKeySelective(DeliveryBox record);
 
     int updateByPrimaryKey(DeliveryBox record);
+
 }
