@@ -7,14 +7,33 @@
 <body>
     <table border="1">
         <tr>
-            <td>ID</td>
+            <th>日期_箱号</th>
+            <th>发货单号</th>
+            <th>物流公司</th>
+            <th>邮费</th>
+            <th>箱重</th>
+            <th>物流状态</th>
+            <th>收货人</th>
+            <th>收货人地址</th>
+            <th>收货人电话</th>
+            <th>发货单图片</th>
         </tr>
         <tr th:each="deliveryBox:${deliveryBoxList}">
-            <td th:text="${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}+'_'+${deliveryBox.boxId}"></td>
-            <td th:text="${deliveryBox.deliveryTicketId}"></td>
+            <td >
+                <a 
+                    th:href="@{/getDeliveryBoxDetails(deliveryDate=${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}, boxId=${deliveryBox.boxId}, expressFeeJpn=${deliveryBox.expressFeeJpn})}" 
+                    th:text="${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}+'_'+${deliveryBox.boxId}">
+                </a>
+            </td>
+            <td >
+                <a 
+                    th:href="@{/getDeliveryBoxDetails(deliveryDate=${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}, boxId=${deliveryBox.boxId}, expressFeeJpn=${deliveryBox.expressFeeJpn})}" 
+                    th:text="${deliveryBox.deliveryTicketId}">
+                </a>
+            </td>
             <td th:text="${deliveryBox.expressCompanyName}"></td>
             <td th:text="${deliveryBox.expressFeeJpn}"></td>
-            <td th:text="${deliveryBox.boxWeight}+${deliveryBox.unit_name}"></td>
+            <td th:text="${deliveryBox.boxWeight}+${deliveryBox.unitName}"></td>
             <td th:text="${deliveryBox.statusName}"></td>
             <td th:text="${deliveryBox.receiverName}"></td>
             <td th:text="${deliveryBox.receiverAddress}"></td>

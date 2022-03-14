@@ -1,8 +1,11 @@
 package com.gq.hph.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.gq.hph.bean.DeliveryBoxBean;
+import com.gq.hph.bean.DeliveryBoxDetailBean;
 import com.gq.hph.repository.mapper.hepinhui.custmapper.CustDeliveryMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +18,22 @@ public class DeliveryBoxService {
         CustDeliveryMapper custDeliveryMapper;
         
         public List<DeliveryBoxBean> getAllDeliveryBoxs() {
-            return (List<DeliveryBoxBean>) custDeliveryMapper.selectAllDelivery();
+            return custDeliveryMapper.selectAllDelivery();
         }
 
+        public int getDeliveryContentWeight(String deliveryDate, String boxId) {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("deliveryDate", deliveryDate);
+            params.put("boxId", boxId);
+            return custDeliveryMapper.selectDeliveryContentWeight(params);
+        }
+
+        public List<DeliveryBoxDetailBean> getDeliveryDetails(String deliveryDate, String boxId, int expressFeeJpn, int contentWeight) {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("deliveryDate", deliveryDate);
+            params.put("boxId", boxId);
+            params.put("expressFeeJpn", expressFeeJpn);
+            params.put("contentWeight", contentWeight);
+            return custDeliveryMapper.selectDeliveryDetails(params);
+        }
 }

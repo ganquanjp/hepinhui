@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gq.hph.repository.mapper.hepinhui.custmapper.CustDeliveryMapper">
-  <select id="selectAllDelivery" resultType="java.util.HashMap">
+  <select id="selectAllDelivery" resultType="com.gq.hph.bean.DeliveryBoxBean">
     SELECT 
           box.delivery_date deliveryDate
         , box.box_id boxId
@@ -15,12 +15,50 @@
         , box.receiver_address receiverAddress
         , box.receiver_phone receiverPhone
     FROM delivery_box box
-    INNER JOIN mst_unit unit
-    ON (box.weight_unit_id = unit.unit_id)
-    INNER JOIN mst_status status
-    ON (box.status_id = status.status_id)
-    INNER JOIN mst_express_company excmp
-    ON (box.express_company_id = excmp.express_company_id)
+      INNER JOIN mst_unit unit
+      ON (box.weight_unit_id = unit.unit_id)
+      INNER JOIN mst_status status
+      ON (box.status_id = status.status_id)
+      INNER JOIN mst_express_company excmp
+      ON (box.express_company_id = excmp.express_company_id)
     ORDER BY box.delivery_date, box.box_id
+  </select>
+
+  <select id="selectDeliveryContentWeight" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT 
+        SUM(prod.package_weight*detail.quantity) contentWeight
+    FROM delivery_detail detail
+      LEFT JOIN mst_product prod
+      ON (detail.bar_code = prod.bar_code)
+    WHERE 
+      <![CDATA[ 
+          TO_CHAR(detail.delivery_date, 'yyyyMMdd')='${deliveryDate}' 
+      AND detail.box_id='${boxId}' 
+      ]]>
+  </select>
+
+  <select id="selectDeliveryDetails" parameterType="java.util.Map" resultType="com.gq.hph.bean.DeliveryBoxDetailBean">
+    SELECT 
+          detail.bar_code barCode
+        , prod.name_jp nameJp
+        , prod.name_cn nameCn
+        , prod.package_weight packageWeight
+        , prod.weight_unit_id weightUnitId
+        , unit.unit_name unitName
+        , detail.quantity quantity
+        , detail.price_jpn priceJpn
+        , #{expressFeeJpn}/#{contentWeight} expressFeeCny
+        , detail.price_jpn * 0.06 priceCny
+        , (#{expressFeeJpn} / #{contentWeight} * prod.package_weight + detail.price_jpn) * 0.06 cifCny
+    FROM delivery_detail detail
+      LEFT JOIN mst_product prod
+      ON (detail.bar_code = prod.bar_code)
+      LEFT JOIN mst_unit unit
+      ON (prod.weight_unit_id = unit.unit_id)
+    WHERE 
+      <![CDATA[ 
+          TO_CHAR(detail.delivery_date, 'yyyyMMdd')='${deliveryDate}' 
+      AND detail.box_id='${boxId}' 
+      ]]>
   </select>
 </mapper>

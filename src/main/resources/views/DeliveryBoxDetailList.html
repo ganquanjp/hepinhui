@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf template</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>条码</th>
+            <th>日文名称</th>
+            <th>中文名称</th>
+            <th>包装重量</th>
+            <th>数量</th>
+            <th>单价（円）</th>
+            <th>单个运费（元）</th>
+            <th>购入成本单价（元）</th>
+            <th>到沪成本单价（元）</th>
+        </tr>
+        <tr th:each="deliveryBoxDetail:${deliveryBoxDetailList}">
+            <td th:text="${deliveryBoxDetail.barCode}"></a></td>
+            <td th:text="${deliveryBoxDetail.nameJp}"></a></td>
+            <td th:text="${deliveryBoxDetail.nameCn}"></td>
+            <td th:text="${deliveryBoxDetail.packageWeight}+${deliveryBoxDetail.unitName}"></td>
+            <td th:text="${deliveryBoxDetail.quantity}"></td>
+            <td th:text="${deliveryBoxDetail.priceJpn}"></td>
+            <td th:text="${deliveryBoxDetail.expressFeeCny}"></td>
+            <td th:text="${deliveryBoxDetail.priceCny}"></td>
+            <td th:text="${deliveryBoxDetail.cifCny}"></td>
+        </tr>
+    </table>
+</body>
+</html>
