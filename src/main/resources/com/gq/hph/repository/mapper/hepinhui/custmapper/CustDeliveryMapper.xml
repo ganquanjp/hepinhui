@@ -47,9 +47,9 @@
         , unit.unit_name unitName
         , detail.quantity quantity
         , detail.price_jpn priceJpn
-        , #{expressFeeJpn} expressFeeCny
-	, #{contentWeight} priceCny
-        , ROUND(#{expressFeeJpn} / #{contentWeight}, 2) cifCny
+	, ROUND(#{expressFeeJpn}/#{contentWeight}::NUMERIC * prod.package_weight * 0.06, 2) expressFeeCny  
+	, ROUND(detail.price_jpn * 0.06, 2) priceCny
+  	, ROUND((#{expressFeeJpn} / #{contentWeight}::NUMERIC * prod.package_weight + detail.price_jpn) * 0.06, 2) cifCny
     FROM delivery_detail detail
       LEFT JOIN mst_product prod
       ON (detail.bar_code = prod.bar_code)
