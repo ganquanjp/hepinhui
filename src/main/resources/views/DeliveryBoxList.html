@@ -27,7 +27,8 @@
             </td>
             <td >
                 <a 
-                     th:href="@{https://trackings.post.japanpost.jp/services/srv/search(requestNo1=${deliveryBox.deliveryTicketId}, search.x=101, search.y=16, locale=ja)}"
+                    th:href="@{https://trackings.post.japanpost.jp/services/srv/search(requestNo1=${#strings.trim(deliveryBox.deliveryTicketId)}, search.x=101, search.y=16, locale=ja)}"
+                    target="_blank"
                     th:text="${deliveryBox.deliveryTicketId}">
                 </a>
             </td>
