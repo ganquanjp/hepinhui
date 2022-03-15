@@ -49,7 +49,7 @@
         , detail.price_jpn priceJpn
         , #{expressFeeJpn} expressFeeCny
 	, #{contentWeight} priceCny
-        , (#{expressFeeJpn} / #{contentWeight} * prod.package_weight + detail.price_jpn) * 0.06 cifCny
+        , (#{expressFeeJpn} / #{contentWeight}) cifCny
     FROM delivery_detail detail
       LEFT JOIN mst_product prod
       ON (detail.bar_code = prod.bar_code)
