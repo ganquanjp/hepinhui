@@ -47,8 +47,8 @@
         , unit.unit_name unitName
         , detail.quantity quantity
         , detail.price_jpn priceJpn
-        , #{expressFeeJpn}/#{contentWeight} expressFeeCny
-        , detail.price_jpn * 0.06 priceCny
+        , #{expressFeeJpn} expressFeeCny
+	, #{contentWeight} priceCny
         , (#{expressFeeJpn} / #{contentWeight} * prod.package_weight + detail.price_jpn) * 0.06 cifCny
     FROM delivery_detail detail
       LEFT JOIN mst_product prod
