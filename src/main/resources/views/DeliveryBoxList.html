@@ -27,7 +27,7 @@
             </td>
             <td >
                 <a 
-                    th:href="@{/getDeliveryBoxDetails(deliveryDate=${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}, boxId=${deliveryBox.boxId}, expressFeeJpn=${deliveryBox.expressFeeJpn})}" 
+                     th:href="@{https://trackings.post.japanpost.jp/services/srv/search(requestNo1=${deliveryBox.deliveryTicketId}, search.x=101, search.y=16, locale=ja)}"
                     th:text="${deliveryBox.deliveryTicketId}">
                 </a>
             </td>
