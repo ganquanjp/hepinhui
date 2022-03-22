@@ -14,37 +14,37 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class DeliveryBoxController extends BaseController{
+public class DeliveryBoxController extends BaseController {
 
     @Autowired
     private DeliveryBoxService deliveryBoxService;
 
     @GetMapping("/getDeliveryBoxs")
-    public ModelAndView  getDeliveryBox(){
+    public ModelAndView getDeliveryBox() {
         List<DeliveryBoxBean> deliveryBoxList = new ArrayList<>();
         deliveryBoxList = deliveryBoxService.getAllDeliveryBoxs();
         ModelAndView modelAndView = new ModelAndView();
-         modelAndView.addObject("deliveryBoxList", deliveryBoxList);
+        modelAndView.addObject("deliveryBoxList", deliveryBoxList);
         // html
         modelAndView.setViewName("DeliveryBoxList");
         return modelAndView;
     }
 
     @GetMapping("/getDeliveryBoxDetails")
-    public ModelAndView  getDeliveryBoxDetails(
-        @RequestParam(name = "deliveryDate") String deliveryDate,
-        @RequestParam(name = "boxId") String boxId,
-        @RequestParam(name = "expressFeeJpn") String expressFeeJpn
-        ){
+    public ModelAndView getDeliveryBoxDetails(
+            @RequestParam(name = "deliveryDate") String deliveryDate,
+            @RequestParam(name = "boxId") String boxId,
+            @RequestParam(name = "expressFeeJpn") String expressFeeJpn) {
 
         // 获取内容总重量
         int contentWeight = deliveryBoxService.getDeliveryContentWeight(deliveryDate, boxId);
 
         // 获取详细内容
         List<DeliveryBoxDetailBean> deliveryBoxDetailList = new ArrayList<>();
-        deliveryBoxDetailList = deliveryBoxService.getDeliveryDetails(deliveryDate, boxId, Integer.parseInt(expressFeeJpn), contentWeight);
+        deliveryBoxDetailList = deliveryBoxService.getDeliveryDetails(deliveryDate, boxId,
+                Integer.parseInt(expressFeeJpn), contentWeight);
         ModelAndView modelAndView = new ModelAndView();
-         modelAndView.addObject("deliveryBoxDetailList", deliveryBoxDetailList);
+        modelAndView.addObject("deliveryBoxDetailList", deliveryBoxDetailList);
         // html
         modelAndView.setViewName("DeliveryBoxDetailList");
         return modelAndView;
