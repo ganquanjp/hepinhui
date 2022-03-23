@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf template</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>条码</th>
+            <th>产品名称</th>
+            <th>发货数量</th>
+        </tr>
+        <tr th:each="deliveryProduct:${deliveryProductList}">
+            <td >
+                <a 
+                    th:href="@{/getProduct(barCode=${deliveryProduct.barCode})}" 
+                    th:text="${deliveryProduct.barCode}">
+                </a>
+            </td>
+            <td >
+                <a 
+                    th:href="@{/getProduct(barCode=${deliveryProduct.barCode})}"
+                    th:text="${deliveryProduct.nameCn}">
+                </a>
+            </td>
+            <td th:text="${deliveryProduct.quantity}"></td>
+        </tr>
+    </table>
+</body>
+</html>

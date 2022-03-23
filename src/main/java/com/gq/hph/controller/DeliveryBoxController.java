@@ -3,8 +3,9 @@ package com.gq.hph.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gq.hph.bean.DeliveryBoxBean;
-import com.gq.hph.bean.DeliveryBoxDetailBean;
+import com.gq.hph.bean.resultbean.DeliveryBoxBean;
+import com.gq.hph.bean.resultbean.DeliveryBoxDetailBean;
+import com.gq.hph.bean.resultbean.DeliveryProductBean;
 import com.gq.hph.service.DeliveryBoxService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,19 @@ public class DeliveryBoxController extends BaseController {
         modelAndView.addObject("deliveryBoxDetailList", deliveryBoxDetailList);
         // html
         modelAndView.setViewName("DeliveryBoxDetailList");
+        return modelAndView;
+    }
+
+    @GetMapping("/getDeliveryProducts")
+    public ModelAndView getDeliveryProducts() {
+
+        // 获取详细内容
+        List<DeliveryProductBean> deliveryProductList = new ArrayList<>();
+        deliveryProductList = deliveryBoxService.getDeliveryProducts();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("deliveryProductList", deliveryProductList);
+        // html
+        modelAndView.setViewName("DeliveryProductList");
         return modelAndView;
     }
 }

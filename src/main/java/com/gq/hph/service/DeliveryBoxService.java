@@ -4,8 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.gq.hph.bean.DeliveryBoxBean;
-import com.gq.hph.bean.DeliveryBoxDetailBean;
+import com.gq.hph.bean.resultbean.DeliveryBoxBean;
+import com.gq.hph.bean.resultbean.DeliveryBoxDetailBean;
+import com.gq.hph.bean.resultbean.DeliveryProductBean;
 import com.gq.hph.repository.mapper.hepinhui.custmapper.CustDeliveryMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,9 @@ public class DeliveryBoxService {
             params.put("expressFeeJpn", expressFeeJpn);
             params.put("contentWeight", contentWeight);
             return custDeliveryMapper.selectDeliveryDetails(params);
+        }
+
+        public List<DeliveryProductBean> getDeliveryProducts() {
+            return custDeliveryMapper.selectDeliveryProducts();
         }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gq.hph.repository.mapper.hepinhui.custmapper.CustDeliveryMapper">
-  <select id="selectAllDelivery" resultType="com.gq.hph.bean.DeliveryBoxBean">
+  <select id="selectAllDelivery" resultType="com.gq.hph.bean.resultbean.DeliveryBoxBean">
     SELECT 
           box.delivery_date deliveryDate
         , box.box_id boxId
@@ -37,7 +37,7 @@
       ]]>
   </select>
 
-  <select id="selectDeliveryDetails" parameterType="java.util.Map" resultType="com.gq.hph.bean.DeliveryBoxDetailBean">
+  <select id="selectDeliveryDetails" parameterType="java.util.Map" resultType="com.gq.hph.bean.resultbean.DeliveryBoxDetailBean">
     SELECT 
           detail.bar_code barCode
         , prod.name_jp nameJp
@@ -47,9 +47,9 @@
         , unit.unit_name unitName
         , detail.quantity quantity
         , detail.price_jpn priceJpn
-	, ROUND(#{expressFeeJpn}/#{contentWeight}::NUMERIC * prod.package_weight * 0.06, 2) expressFeeCny  
-	, ROUND(detail.price_jpn * 0.06, 2) priceCny
-  	, ROUND((#{expressFeeJpn} / #{contentWeight}::NUMERIC * prod.package_weight + detail.price_jpn) * 0.06, 2) cifCny
+	      , ROUND(#{expressFeeJpn}/#{contentWeight}::NUMERIC * prod.package_weight * 0.06, 2) expressFeeCny  
+	      , ROUND(detail.price_jpn * 0.06, 2) priceCny
+  	    , ROUND((#{expressFeeJpn} / #{contentWeight}::NUMERIC * prod.package_weight + detail.price_jpn) * 0.06, 2) cifCny
     FROM delivery_detail detail
       LEFT JOIN mst_product prod
       ON (detail.bar_code = prod.bar_code)
@@ -60,5 +60,19 @@
           TO_CHAR(detail.delivery_date, 'yyyyMMdd')='${deliveryDate}' 
       AND detail.box_id='${boxId}' 
       ]]>
+  </select>
+  <select id="selectDeliveryProducts" parameterType="java.util.Map" resultType="com.gq.hph.bean.resultbean.DeliveryProductBean">
+    SELECT 
+        ddt.bar_code barCode
+      , mp.name_cn nameCn
+      , sum(quantity) quantity
+    FROM delivery_box dbx
+      LEFT JOIN delivery_detail ddt 
+      ON (dbx.delivery_date = ddt.delivery_date AND dbx.box_id = ddt.box_id)
+      LEFT JOIN mst_product mp ON (ddt.bar_code = mp.bar_code)
+      LEFT JOIN mst_unit mi ON (mp.weight_unit_id = mi. unit_id)
+    WHERE dbx.status_id IN ('20', '25')
+    GROUP BY ddt.bar_code,mp.name_cn 
+    ORDER BY mp.name_cn
   </select>
 </mapper>
