@@ -1,31 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Thymeleaf template</title>
+    <title>在途商品一览</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-    <table border="1">
-        <tr>
-            <th>条码</th>
-            <th>产品名称</th>
-            <th>发货数量</th>
-        </tr>
-        <tr th:each="deliveryProduct:${deliveryProductList}">
-            <td >
-                <a 
-                    th:href="@{/getProduct(barCode=${deliveryProduct.barCode})}" 
-                    th:text="${deliveryProduct.barCode}">
-                </a>
-            </td>
-            <td >
-                <a 
-                    th:href="@{/getProduct(barCode=${deliveryProduct.barCode})}"
-                    th:text="${deliveryProduct.nameCn}">
-                </a>
-            </td>
-            <td th:text="${deliveryProduct.quantity}"></td>
-        </tr>
-    </table>
+    <div align="center">
+        <p>在途商品一览</p><a th:href="@{/}" th:text="返回首页"></a>
+        <table border="1">
+            <tr>
+                <th>条码</th>
+                <th>产品名称</th>
+                <th>在途数量</th>
+                <th>最早发货</th>
+            </tr>
+            <tr th:each="deliveryProduct:${deliveryProductList}">
+                <td >
+                    <a 
+                        th:href="@{/getProduct(barCode=${deliveryProduct.barCode})}" 
+                        th:text="${deliveryProduct.barCode}">
+                    </a>
+                </td>
+                <td >
+                    <a 
+                        th:href="@{/getProduct(barCode=${deliveryProduct.barCode})}"
+                        th:text="${deliveryProduct.nameCn}">
+                    </a>
+                </td>
+                <td th:text="${deliveryProduct.quantity}"></td>
+                <td >
+                    <a 
+                        th:href="@{/getDeliveryBoxDetails(deliveryDate=${deliveryProduct.deliveryDate}, boxId=${deliveryProduct.boxId}, expressFeeJpn=${deliveryProduct.expressFeeJpn})}" 
+                        th:text="${deliveryProduct.deliveryDate}+'_'+${deliveryProduct.boxId}">
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

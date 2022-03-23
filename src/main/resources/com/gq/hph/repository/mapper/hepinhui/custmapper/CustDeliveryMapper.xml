@@ -63,16 +63,37 @@
   </select>
   <select id="selectDeliveryProducts" parameterType="java.util.Map" resultType="com.gq.hph.bean.resultbean.DeliveryProductBean">
     SELECT 
-        ddt.bar_code barCode
-      , mp.name_cn nameCn
-      , sum(quantity) quantity
-    FROM delivery_box dbx
-      LEFT JOIN delivery_detail ddt 
-      ON (dbx.delivery_date = ddt.delivery_date AND dbx.box_id = ddt.box_id)
-      LEFT JOIN mst_product mp ON (ddt.bar_code = mp.bar_code)
-      LEFT JOIN mst_unit mi ON (mp.weight_unit_id = mi. unit_id)
-    WHERE dbx.status_id IN ('20', '25')
-    GROUP BY ddt.bar_code,mp.name_cn 
-    ORDER BY mp.name_cn
+            dp.bar_code barCode
+          , dp.name_cn nameCn
+          , dp.quantity
+          , substr(minBox.delivery_box,1,8) deliveryDate
+          , substr(minBox.delivery_box,10) boxId
+          , delbox.express_fee_jpn expressFeeJpn
+    FROM (
+        SELECT 
+            ddt.bar_code
+          , mp.name_cn
+          , sum(ddt.quantity) AS quantity
+        FROM delivery_box dbx
+          LEFT JOIN delivery_detail ddt 
+          ON (dbx.delivery_date = ddt.delivery_date AND dbx.box_id = ddt.box_id)
+          LEFT JOIN mst_product mp ON (ddt.bar_code = mp.bar_code)
+          LEFT JOIN mst_unit mi ON (mp.weight_unit_id = mi. unit_id)
+        WHERE dbx.status_id IN ('20', '25')
+        GROUP BY ddt.bar_code,mp.name_cn
+    ) dp
+    INNER JOIN (
+        SELECT dt.bar_code, MIN(TO_CHAR(dt.delivery_date, 'yyyyMMdd')||'_'||dt.box_id) delivery_box 
+        FROM delivery_box db
+        INNER JOIN delivery_detail dt 
+        ON (dt.delivery_date = db.delivery_date AND dt.box_id = db.box_id)
+        WHERE db.status_id IN ('20', '25')
+        GROUP BY dt.bar_code
+    ) minBox
+    ON (dp.bar_code = minBox.bar_code )
+    INNER JOIN delivery_box delbox
+    ON (TO_CHAR(delbox.delivery_date, 'yyyyMMdd') = substr(minBox.delivery_box,1,8) 
+    AND delbox.box_id = substr(minBox.delivery_box, 10))
+    ORDER BY dp.name_cn
   </select>
 </mapper>
