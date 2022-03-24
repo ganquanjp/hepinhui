@@ -29,7 +29,7 @@
                 </td>
                 <td >
                     <a 
-                        th:href="@{https://trackings.post.japanpost.jp/services/srv/search(requestNo1=${#strings.trim(deliveryBox.deliveryTicketId)}, search.x=101, search.y=16, locale=ja)}"
+                        th:href="@{${@environment.getProperty('japanpost.ticket.search.url')}(requestNo1=${#strings.trim(deliveryBox.deliveryTicketId)}, search.x=101, search.y=16, locale=ja)}"
                         target="_blank"
                         th:text="${deliveryBox.deliveryTicketId}">
                     </a>
@@ -41,7 +41,7 @@
                 <td th:text="${deliveryBox.receiverName}"></td>
                 <td th:text="${deliveryBox.receiverAddress}"></td>
                 <td th:text="${deliveryBox.receiverPhone}"></td>
-                <td th:text="${deliveryBox.deliveryTicketPhoto}"></td>
+                <td><img th:src="@{${@environment.getProperty('delivery.ticket.photo.dir')}}+'20220325_001_CD417021853JP.png'" ></td>
             </tr>
         </table>
     </div>
