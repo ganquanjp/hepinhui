@@ -41,7 +41,7 @@
                 <td th:text="${deliveryBox.receiverName}"></td>
                 <td th:text="${deliveryBox.receiverAddress}"></td>
                 <td th:text="${deliveryBox.receiverPhone}"></td>
-                <td><img th:src="@{${@environment.getProperty('delivery.ticket.photo.dir')}}+'20220325_001_CD417021853JP.png'" ></td>
+                <td><img th:src="@{${@environment.getProperty('spring.mvc.static-path-pattern')}}+'20220325_001_CD417021853JP.png'" ></td>
             </tr>
         </table>
     </div>

@@ -1,8 +1,6 @@
 package com.gq.hph.bean.resultbean;
 
 import java.math.BigDecimal;
-import java.util.Date;
-
 public class DeliveryProductBean {
 
 
