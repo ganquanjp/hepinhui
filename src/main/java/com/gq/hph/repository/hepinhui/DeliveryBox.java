@@ -28,7 +28,7 @@ public class DeliveryBox {
 
     private String receiverPhone;
 
-    private String deliveryTicketPhoto;
+    private Date deliveryArrivalDate;
 
     public Date getDeliveryDate() {
         return deliveryDate;
@@ -126,11 +126,11 @@ public class DeliveryBox {
         this.receiverPhone = receiverPhone == null ? null : receiverPhone.trim();
     }
 
-    public String getDeliveryTicketPhoto() {
-        return deliveryTicketPhoto;
+    public Date getDeliveryArrivalDate() {
+        return deliveryArrivalDate;
     }
 
-    public void setDeliveryTicketPhoto(String deliveryTicketPhoto) {
-        this.deliveryTicketPhoto = deliveryTicketPhoto == null ? null : deliveryTicketPhoto.trim();
+    public void setDeliveryArrivalDate(Date deliveryArrivalDate) {
+        this.deliveryArrivalDate = deliveryArrivalDate;
     }
 }

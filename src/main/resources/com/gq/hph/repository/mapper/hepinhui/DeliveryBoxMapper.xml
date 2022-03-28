@@ -14,12 +14,12 @@
     <result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
     <result column="receiver_address" jdbcType="VARCHAR" property="receiverAddress" />
     <result column="receiver_phone" jdbcType="CHAR" property="receiverPhone" />
-    <result column="delivery_ticket_photo" jdbcType="CHAR" property="deliveryTicketPhoto" />
+    <result column="delivery_arrival_date" jdbcType="DATE" property="deliveryArrivalDate" />
   </resultMap>
   <sql id="Base_Column_List">
     delivery_date, box_id, box_weight, weight_unit_id, express_company_id, express_fee_jpn, 
     express_back_fee_jpn, status_id, delivery_ticket_id, receiver_name, receiver_address, 
-    receiver_phone, delivery_ticket_photo
+    receiver_phone, delivery_arrival_date
   </sql>
   <select id="selectAll" parameterType="map" resultMap="BaseResultMap">
     select 
@@ -43,12 +43,12 @@
       weight_unit_id, express_company_id, express_fee_jpn, 
       express_back_fee_jpn, status_id, delivery_ticket_id, 
       receiver_name, receiver_address, receiver_phone, 
-      delivery_ticket_photo)
+      delivery_arrival_date)
     values (#{deliveryDate,jdbcType=DATE}, #{boxId,jdbcType=CHAR}, #{boxWeight,jdbcType=NUMERIC}, 
       #{weightUnitId,jdbcType=CHAR}, #{expressCompanyId,jdbcType=CHAR}, #{expressFeeJpn,jdbcType=NUMERIC}, 
       #{expressBackFeeJpn,jdbcType=NUMERIC}, #{statusId,jdbcType=CHAR}, #{deliveryTicketId,jdbcType=CHAR}, 
       #{receiverName,jdbcType=VARCHAR}, #{receiverAddress,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=CHAR}, 
-      #{deliveryTicketPhoto,jdbcType=CHAR})
+      #{deliveryArrivalDate,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.gq.hph.repository.hepinhui.DeliveryBox">
     insert into hepinhui.delivery_box
@@ -89,8 +89,8 @@
       <if test="receiverPhone != null">
         receiver_phone,
       </if>
-      <if test="deliveryTicketPhoto != null">
-        delivery_ticket_photo,
+      <if test="deliveryArrivalDate != null">
+        delivery_arrival_date,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -130,8 +130,8 @@
       <if test="receiverPhone != null">
         #{receiverPhone,jdbcType=CHAR},
       </if>
-      <if test="deliveryTicketPhoto != null">
-        #{deliveryTicketPhoto,jdbcType=CHAR},
+      <if test="deliveryArrivalDate != null">
+        #{deliveryArrivalDate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -168,8 +168,8 @@
       <if test="receiverPhone != null">
         receiver_phone = #{receiverPhone,jdbcType=CHAR},
       </if>
-      <if test="deliveryTicketPhoto != null">
-        delivery_ticket_photo = #{deliveryTicketPhoto,jdbcType=CHAR},
+      <if test="deliveryArrivalDate != null">
+        delivery_arrival_date = #{deliveryArrivalDate,jdbcType=DATE},
       </if>
     </set>
     where delivery_date = #{deliveryDate,jdbcType=DATE}
@@ -187,7 +187,7 @@
       receiver_name = #{receiverName,jdbcType=VARCHAR},
       receiver_address = #{receiverAddress,jdbcType=VARCHAR},
       receiver_phone = #{receiverPhone,jdbcType=CHAR},
-      delivery_ticket_photo = #{deliveryTicketPhoto,jdbcType=CHAR}
+      delivery_arrival_date = #{deliveryArrivalDate,jdbcType=DATE}
     where delivery_date = #{deliveryDate,jdbcType=DATE}
       and box_id = #{boxId,jdbcType=CHAR}
   </update>

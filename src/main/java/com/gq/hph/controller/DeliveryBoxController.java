@@ -21,7 +21,7 @@ public class DeliveryBoxController extends BaseController {
     private DeliveryBoxService deliveryBoxService;
 
     @GetMapping("/getDeliveryBoxs")
-    public ModelAndView getDeliveryBox() {
+    public ModelAndView getDeliveryBoxs() {
         List<DeliveryBoxBean> deliveryBoxList = new ArrayList<>();
         deliveryBoxList = deliveryBoxService.getAllDeliveryBoxs();
         ModelAndView modelAndView = new ModelAndView();
@@ -61,6 +61,24 @@ public class DeliveryBoxController extends BaseController {
         modelAndView.addObject("deliveryProductList", deliveryProductList);
         // html
         modelAndView.setViewName("DeliveryProductList");
+        return modelAndView;
+    }
+
+    
+    @GetMapping("/UpdateDeliveryBoxStatus")
+    public ModelAndView UpdateDeliveryBoxStatus(
+        @RequestParam(name = "deliveryDate") String deliveryDate,
+        @RequestParam(name = "boxId") String boxId,
+        @RequestParam(name = "statusId") String statusId) {
+
+        deliveryBoxService.updateByPrimaryKeySelective(deliveryDate, boxId, statusId);
+        List<DeliveryBoxBean> deliveryBoxList = new ArrayList<>();
+        deliveryBoxList = deliveryBoxService.getAllDeliveryBoxs();
+        // 获取详细内容
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("deliveryBoxList", deliveryBoxList);
+        // html
+        modelAndView.setViewName("deliveryBoxList");
         return modelAndView;
     }
 }

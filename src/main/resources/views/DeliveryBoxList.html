@@ -3,8 +3,18 @@
 <head>
     <title>发货单一览</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript"  th:inline="javascript">
+		/*<![CDATA[*/ 
+		function doUpdateStatus(deliveryDate, boxId, statusId){
+            var link = /*[[@{/UpdateDeliveryBoxStatus}]]*/
+            link = link+"?deliveryDate=" + deliveryDate + "&boxId=" +  boxId + "&statusId=" +  statusId;
+            location.href=link;
+		}
+		/*]]>*/
+	</script>
 </head>
 <body>
+    
     <div align="center">
         <p>发货单一览</p><a th:href="@{/}" th:text="返回首页"></a>
         <table border="1">
@@ -37,7 +47,15 @@
                 <td th:text="${deliveryBox.expressCompanyName}"></td>
                 <td th:text="${deliveryBox.expressFeeJpn}"></td>
                 <td th:text="${deliveryBox.boxWeight}+${deliveryBox.unitName}"></td>
-                <td th:text="${deliveryBox.statusName}"></td>
+                <td>
+                    <span th:text="${deliveryBox.statusName}"></span>
+                    <span th:if="${deliveryBox.statusId=='20' or deliveryBox.statusId=='25'}">
+                        <span th:if="${deliveryBox.statusId=='20'}">
+                            <button th:onclick="doUpdateStatus([[${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}]], [[${deliveryBox.boxId}]], '25');">到岸</button>
+                        </span>
+                        <button th:onclick="doUpdateStatus([[${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}]], [[${deliveryBox.boxId}]], '30');">到货</button>
+                    </span>
+                </td>
                 <td th:text="${deliveryBox.receiverName}"></td>
                 <td th:text="${deliveryBox.receiverAddress}"></td>
                 <td th:text="${deliveryBox.receiverPhone}"></td>

@@ -19,6 +19,8 @@ public class DeliveryBoxBean {
 
     private String unitName;
 
+    private String statusId;
+
     private String statusName;
 
     private String receiverName;
@@ -26,6 +28,8 @@ public class DeliveryBoxBean {
     private String receiverAddress;
 
     private String receiverPhone;
+
+    private Date deliveryArrivalDate;
 
     public Date getDeliveryDate() {
         return deliveryDate;
@@ -75,6 +79,14 @@ public class DeliveryBoxBean {
         this.boxWeight = boxWeight;
     }
 
+    public String getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(String statusId) {
+        this.statusId = statusId;
+    }
+
     public String getUnitName() {
         return unitName;
     }
@@ -115,13 +127,11 @@ public class DeliveryBoxBean {
         this.receiverPhone = receiverPhone;
     }
 
-    public String getDeliveryTicketPhoto() {
-        return deliveryTicketPhoto;
+    public Date getDeliveryArrivalDate() {
+        return deliveryArrivalDate;
     }
 
-    public void setDeliveryTicketPhoto(String deliveryTicketPhoto) {
-        this.deliveryTicketPhoto = deliveryTicketPhoto;
+    public void setDeliveryArrivalDate(Date deliveryTicketPhoto) {
+        this.deliveryArrivalDate = deliveryArrivalDate;
     }
-
-    private String deliveryTicketPhoto;
 }

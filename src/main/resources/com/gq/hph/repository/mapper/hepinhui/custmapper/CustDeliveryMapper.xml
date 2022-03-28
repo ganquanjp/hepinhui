@@ -9,6 +9,7 @@
         , box.express_fee_jpn expressFeeJpn
         , excmp.express_company_name expressCompanyName
         , box.box_weight boxWeight
+        , box.status_id statusId
         , unit.unit_name unitName
         , status.status_name statusName
         , box.receiver_name receiverName
