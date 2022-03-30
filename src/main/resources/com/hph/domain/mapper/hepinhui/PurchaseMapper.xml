@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hph.domain.mapper.hepinhui.PurchaseMapper">
+  <resultMap id="BaseResultMap" type="com.hph.domain.hepinhui.Purchase">
+    <result column="bar_code" jdbcType="CHAR" property="barCode" />
+    <result column="price_jpn" jdbcType="NUMERIC" property="priceJpn" />
+    <result column="quantity" jdbcType="NUMERIC" property="quantity" />
+    <result column="platform_id" jdbcType="CHAR" property="platformId" />
+    <result column="store_id" jdbcType="CHAR" property="storeId" />
+    <result column="purchase_date" jdbcType="TIMESTAMP" property="purchaseDate" />
+    <result column="purchase_ticket_id" jdbcType="CHAR" property="purchaseTicketId" />
+    <result column="purchase_status_id" jdbcType="CHAR" property="purchaseStatusId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.hph.domain.hepinhui.Purchase">
+    insert into hepinhui.purchase (bar_code, price_jpn, quantity, 
+      platform_id, store_id, purchase_date, 
+      purchase_ticket_id, purchase_status_id)
+    values (#{barCode,jdbcType=CHAR}, #{priceJpn,jdbcType=NUMERIC}, #{quantity,jdbcType=NUMERIC}, 
+      #{platformId,jdbcType=CHAR}, #{storeId,jdbcType=CHAR}, #{purchaseDate,jdbcType=TIMESTAMP}, 
+      #{purchaseTicketId,jdbcType=CHAR}, #{purchaseStatusId,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hph.domain.hepinhui.Purchase">
+    insert into hepinhui.purchase
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="barCode != null">
+        bar_code,
+      </if>
+      <if test="priceJpn != null">
+        price_jpn,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="platformId != null">
+        platform_id,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="purchaseDate != null">
+        purchase_date,
+      </if>
+      <if test="purchaseTicketId != null">
+        purchase_ticket_id,
+      </if>
+      <if test="purchaseStatusId != null">
+        purchase_status_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="barCode != null">
+        #{barCode,jdbcType=CHAR},
+      </if>
+      <if test="priceJpn != null">
+        #{priceJpn,jdbcType=NUMERIC},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=NUMERIC},
+      </if>
+      <if test="platformId != null">
+        #{platformId,jdbcType=CHAR},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=CHAR},
+      </if>
+      <if test="purchaseDate != null">
+        #{purchaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseTicketId != null">
+        #{purchaseTicketId,jdbcType=CHAR},
+      </if>
+      <if test="purchaseStatusId != null">
+        #{purchaseStatusId,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

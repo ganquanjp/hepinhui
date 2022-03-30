@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hph.domain.mapper.hepinhui.MstRegionMapper">
+  <resultMap id="BaseResultMap" type="com.hph.domain.hepinhui.MstRegion">
+    <id column="region_id" jdbcType="CHAR" property="regionId" />
+    <result column="region_name" jdbcType="VARCHAR" property="regionName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    region_id, region_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hepinhui.mst_region
+    where region_id = #{regionId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hepinhui.mst_region
+    where region_id = #{regionId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hph.domain.hepinhui.MstRegion">
+    insert into hepinhui.mst_region (region_id, region_name)
+    values (#{regionId,jdbcType=CHAR}, #{regionName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hph.domain.hepinhui.MstRegion">
+    insert into hepinhui.mst_region
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="regionId != null">
+        region_id,
+      </if>
+      <if test="regionName != null">
+        region_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="regionId != null">
+        #{regionId,jdbcType=CHAR},
+      </if>
+      <if test="regionName != null">
+        #{regionName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hph.domain.hepinhui.MstRegion">
+    update hepinhui.mst_region
+    <set>
+      <if test="regionName != null">
+        region_name = #{regionName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where region_id = #{regionId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hph.domain.hepinhui.MstRegion">
+    update hepinhui.mst_region
+    set region_name = #{regionName,jdbcType=VARCHAR}
+    where region_id = #{regionId,jdbcType=CHAR}
+  </update>
+</mapper>

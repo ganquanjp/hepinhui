@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hph.domain.mapper.hepinhui.MstStatusMapper">
+  <resultMap id="BaseResultMap" type="com.hph.domain.hepinhui.MstStatus">
+    <id column="status_id" jdbcType="CHAR" property="statusId" />
+    <result column="status_name" jdbcType="VARCHAR" property="statusName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    status_id, status_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hepinhui.mst_status
+    where status_id = #{statusId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hepinhui.mst_status
+    where status_id = #{statusId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hph.domain.hepinhui.MstStatus">
+    insert into hepinhui.mst_status (status_id, status_name)
+    values (#{statusId,jdbcType=CHAR}, #{statusName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hph.domain.hepinhui.MstStatus">
+    insert into hepinhui.mst_status
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="statusId != null">
+        status_id,
+      </if>
+      <if test="statusName != null">
+        status_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="statusId != null">
+        #{statusId,jdbcType=CHAR},
+      </if>
+      <if test="statusName != null">
+        #{statusName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hph.domain.hepinhui.MstStatus">
+    update hepinhui.mst_status
+    <set>
+      <if test="statusName != null">
+        status_name = #{statusName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where status_id = #{statusId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hph.domain.hepinhui.MstStatus">
+    update hepinhui.mst_status
+    set status_name = #{statusName,jdbcType=VARCHAR}
+    where status_id = #{statusId,jdbcType=CHAR}
+  </update>
+</mapper>

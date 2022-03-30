@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hph.domain.mapper.hepinhui.MstCurrencyMapper">
+  <resultMap id="BaseResultMap" type="com.hph.domain.hepinhui.MstCurrency">
+    <id column="currency_id" jdbcType="CHAR" property="currencyId" />
+    <result column="currency_name" jdbcType="VARCHAR" property="currencyName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    currency_id, currency_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hepinhui.mst_currency
+    where currency_id = #{currencyId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hepinhui.mst_currency
+    where currency_id = #{currencyId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hph.domain.hepinhui.MstCurrency">
+    insert into hepinhui.mst_currency (currency_id, currency_name)
+    values (#{currencyId,jdbcType=CHAR}, #{currencyName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hph.domain.hepinhui.MstCurrency">
+    insert into hepinhui.mst_currency
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="currencyId != null">
+        currency_id,
+      </if>
+      <if test="currencyName != null">
+        currency_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="currencyId != null">
+        #{currencyId,jdbcType=CHAR},
+      </if>
+      <if test="currencyName != null">
+        #{currencyName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hph.domain.hepinhui.MstCurrency">
+    update hepinhui.mst_currency
+    <set>
+      <if test="currencyName != null">
+        currency_name = #{currencyName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where currency_id = #{currencyId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hph.domain.hepinhui.MstCurrency">
+    update hepinhui.mst_currency
+    set currency_name = #{currencyName,jdbcType=VARCHAR}
+    where currency_id = #{currencyId,jdbcType=CHAR}
+  </update>
+</mapper>

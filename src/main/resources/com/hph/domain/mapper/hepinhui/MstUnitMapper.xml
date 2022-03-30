@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hph.domain.mapper.hepinhui.MstUnitMapper">
+  <resultMap id="BaseResultMap" type="com.hph.domain.hepinhui.MstUnit">
+    <id column="unit_id" jdbcType="CHAR" property="unitId" />
+    <result column="unit_name" jdbcType="VARCHAR" property="unitName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    unit_id, unit_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hepinhui.mst_unit
+    where unit_id = #{unitId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hepinhui.mst_unit
+    where unit_id = #{unitId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hph.domain.hepinhui.MstUnit">
+    insert into hepinhui.mst_unit (unit_id, unit_name)
+    values (#{unitId,jdbcType=CHAR}, #{unitName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hph.domain.hepinhui.MstUnit">
+    insert into hepinhui.mst_unit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="unitId != null">
+        unit_id,
+      </if>
+      <if test="unitName != null">
+        unit_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="unitId != null">
+        #{unitId,jdbcType=CHAR},
+      </if>
+      <if test="unitName != null">
+        #{unitName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hph.domain.hepinhui.MstUnit">
+    update hepinhui.mst_unit
+    <set>
+      <if test="unitName != null">
+        unit_name = #{unitName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where unit_id = #{unitId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hph.domain.hepinhui.MstUnit">
+    update hepinhui.mst_unit
+    set unit_name = #{unitName,jdbcType=VARCHAR}
+    where unit_id = #{unitId,jdbcType=CHAR}
+  </update>
+</mapper>

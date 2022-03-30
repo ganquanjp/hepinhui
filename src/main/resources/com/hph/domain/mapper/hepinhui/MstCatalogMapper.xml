@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hph.domain.mapper.hepinhui.MstCatalogMapper">
+  <resultMap id="BaseResultMap" type="com.hph.domain.hepinhui.MstCatalog">
+    <id column="main_id" jdbcType="CHAR" property="mainId" />
+    <id column="sec_id" jdbcType="CHAR" property="secId" />
+    <result column="main_name" jdbcType="VARCHAR" property="mainName" />
+    <result column="sec_name" jdbcType="VARCHAR" property="secName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    main_id, sec_id, main_name, sec_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hepinhui.mst_catalog
+    where main_id = #{mainId,jdbcType=CHAR}
+      and sec_id = #{secId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from hepinhui.mst_catalog
+    where main_id = #{mainId,jdbcType=CHAR}
+      and sec_id = #{secId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hph.domain.hepinhui.MstCatalog">
+    insert into hepinhui.mst_catalog (main_id, sec_id, main_name, 
+      sec_name)
+    values (#{mainId,jdbcType=CHAR}, #{secId,jdbcType=CHAR}, #{mainName,jdbcType=VARCHAR}, 
+      #{secName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hph.domain.hepinhui.MstCatalog">
+    insert into hepinhui.mst_catalog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mainId != null">
+        main_id,
+      </if>
+      <if test="secId != null">
+        sec_id,
+      </if>
+      <if test="mainName != null">
+        main_name,
+      </if>
+      <if test="secName != null">
+        sec_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mainId != null">
+        #{mainId,jdbcType=CHAR},
+      </if>
+      <if test="secId != null">
+        #{secId,jdbcType=CHAR},
+      </if>
+      <if test="mainName != null">
+        #{mainName,jdbcType=VARCHAR},
+      </if>
+      <if test="secName != null">
+        #{secName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hph.domain.hepinhui.MstCatalog">
+    update hepinhui.mst_catalog
+    <set>
+      <if test="mainName != null">
+        main_name = #{mainName,jdbcType=VARCHAR},
+      </if>
+      <if test="secName != null">
+        sec_name = #{secName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where main_id = #{mainId,jdbcType=CHAR}
+      and sec_id = #{secId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hph.domain.hepinhui.MstCatalog">
+    update hepinhui.mst_catalog
+    set main_name = #{mainName,jdbcType=VARCHAR},
+      sec_name = #{secName,jdbcType=VARCHAR}
+    where main_id = #{mainId,jdbcType=CHAR}
+      and sec_id = #{secId,jdbcType=CHAR}
+  </update>
+</mapper>
