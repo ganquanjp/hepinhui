@@ -78,7 +78,7 @@ public class DeliveryBoxController extends BaseController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("deliveryBoxList", deliveryBoxList);
         // html
-        modelAndView.setViewName("deliveryBoxList");
+        modelAndView.setViewName("DeliveryBoxList");
         return modelAndView;
     }
 }
