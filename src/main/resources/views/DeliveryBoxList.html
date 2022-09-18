@@ -60,7 +60,7 @@
                 <td th:text="${deliveryBox.receiverAddress}"></td>
                 <td th:text="${deliveryBox.receiverPhone}"></td>
                 <td>
-                    <a href="/images/${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}_${deliveryBox.boxId}.jpg" title="打开图像" target="_blank">
+                    <a href="/images/[[${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}]]_[[${deliveryBox.boxId}]].jpg" title="打开图像" target="_blank">
                         <img height="16px" width="16x" src="'/images/'+${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}+'_'+${deliveryBox.boxId}+'.jpg'" >
                     </a>
                 </td>
