@@ -10,6 +10,10 @@
             link = link+"?deliveryDate=" + deliveryDate + "&boxId=" +  boxId + "&statusId=" +  statusId;
             location.href=link;
 		}
+        function openImage(deliveryDate, boxId){
+            var link = "/images/" + deliveryDate + "_" + boxId;
+            window.open(link, "_blank");
+        }
 		/*]]>*/
 	</script>
 </head>
@@ -60,9 +64,10 @@
                 <td th:text="${deliveryBox.receiverAddress}"></td>
                 <td th:text="${deliveryBox.receiverPhone}"></td>
                 <td>
-                    <a th:href="{'/images/'+${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}+'_'+${deliveryBox.boxId}+'.jpg'}" title="打开图像" target="_blank">
-                        <img height="16px" width="16x" src="{'/images/'+${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}+'_'+${deliveryBox.boxId}+'.jpg'}" >
-                    </a>
+                    <button th:onclick="openImage([[${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}]], [[${deliveryBox.boxId}]]);">打开图像</button>
+                    <!--<a th:href="{'/images/'+${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}+'_'+${deliveryBox.boxId}+'.jpg'}" title="打开图像" target="_blank">
+                        <img height="16px" width="16x" src="'/images/'+${#dates.format(deliveryBox.deliveryDate, 'yyyyMMdd')}+'_'+${deliveryBox.boxId}+'.jpg'" >
+                    </a>-->
                 </td>
                 <!--<td><img th:src="@{${@environment.getProperty('spring.mvc.static-path-pattern')}}+'20220325_001_CD417021853JP.jpg'" ></td>-->
             </tr>
