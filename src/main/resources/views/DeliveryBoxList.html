@@ -3,7 +3,6 @@
 <head>
     <title>发货单一览</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="referrer" content="no-referrer" />
     <script type="text/javascript"  th:inline="javascript">
 		/*<![CDATA[*/ 
 		function doUpdateStatus(deliveryDate, boxId, statusId){
@@ -60,7 +59,7 @@
                 <td th:text="${deliveryBox.receiverName}"></td>
                 <td th:text="${deliveryBox.receiverAddress}"></td>
                 <td th:text="${deliveryBox.receiverPhone}"></td>
-                <td><img th:src="http://35.75.59.158:8081/images/2022325_001_CD417021853JP.jpg" ></td>
+                <td><img th:src="../../images/2022325_001_CD417021853JP.jpg" ></td>
                 <!--<td><img th:src="@{${@environment.getProperty('spring.mvc.static-path-pattern')}}+'20220325_001_CD417021853JP.jpg'" ></td>-->
             </tr>
         </table>
