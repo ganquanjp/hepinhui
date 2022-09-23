@@ -20,7 +20,10 @@
 <body>
     
     <div align="center">
-        <p>发货单一览</p><a th:href="@{/}" th:text="返回首页"></a>
+        <p>发货单一览</p>
+        <a th:href="@{/}" th:text="返回首页"></a>
+        <a th:href="@{/getDeliveryBoxs(statusId='95')}">显示所有</a>
+        <a th:href="@{/getDeliveryBoxs(statusId='25')}">隐藏已到货</a>
         <table border="1">
             <tr>
                 <th>日期_箱号</th>

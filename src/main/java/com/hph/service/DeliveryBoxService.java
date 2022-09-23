@@ -26,8 +26,14 @@ public class DeliveryBoxService {
     @Autowired
     DeliveryBoxMapper deliveryBoxMapper;
 
-    public List<DeliveryBoxBean> getAllDeliveryBoxs() {
-        return custDeliveryMapper.selectAllDelivery();
+    // public List<DeliveryBoxBean> getAllDeliveryBoxs() {
+    //     return custDeliveryMapper.selectAllDelivery();
+    // }
+
+    public List<DeliveryBoxBean> getAllDeliveryBoxs(String statusId) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("status", statusId);
+        return custDeliveryMapper.selectAllDelivery(params);
     }
 
     public int getDeliveryContentWeight(String deliveryDate, String boxId) {

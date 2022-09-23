@@ -8,7 +8,9 @@ import com.hph.bean.resultbean.DeliveryBoxDetailBean;
 import com.hph.bean.resultbean.DeliveryProductBean;
 
 public interface CustDeliveryMapper {
-    List<DeliveryBoxBean> selectAllDelivery();
+    List<DeliveryBoxBean> selectAllDelivery(Map<String, Object> params);
+
+    //List<DeliveryBoxBean> selectDeliveryByStatus(String status);
 
     int selectDeliveryContentWeight(Map<String, Object> params);
 

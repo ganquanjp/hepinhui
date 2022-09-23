@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hph.domain.mapper.hepinhui.custmapper.CustDeliveryMapper">
-  <select id="selectAllDelivery" resultType="com.hph.bean.resultbean.DeliveryBoxBean">
+  <select id="selectAllDelivery" parameterType="java.util.Map" resultType="com.hph.bean.resultbean.DeliveryBoxBean">
     SELECT 
           box.delivery_date deliveryDate
         , box.box_id boxId
@@ -22,6 +22,7 @@
       ON (box.status_id = status.status_id)
       INNER JOIN mst_express_company excmp
       ON (box.express_company_id = excmp.express_company_id)
+    WHERE <![CDATA[ box.status_id <= '${status}' ]]>
     ORDER BY box.delivery_date, box.box_id
   </select>
 
