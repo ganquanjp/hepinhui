@@ -42,11 +42,7 @@ public class DeliveryBoxController extends BaseController {
         List<DeliveryBoxDetailBean> deliveryBoxDetailList = new ArrayList<>();
         deliveryBoxDetailList = deliveryBoxService.getDeliveryDetails(deliveryDate, boxId,
                 Integer.parseInt(expressFeeJpn), contentWeight);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("deliveryBoxDetailList", deliveryBoxDetailList);
-        // html
-        modelAndView.setViewName("DeliveryBoxDetailList");
-        return modelAndView;
+        return setModelAndView("DeliveryBoxDetailList", "deliveryBoxList", deliveryBoxDetailList);
     }
 
     @GetMapping("/getDeliveryProducts")
@@ -59,7 +55,7 @@ public class DeliveryBoxController extends BaseController {
         modelAndView.addObject("deliveryProductList", deliveryProductList);
         // html
         modelAndView.setViewName("DeliveryProductList");
-        return modelAndView;
+        return setModelAndView("DeliveryProductList", "deliveryProductList", deliveryProductList);
     }
 
     
@@ -71,7 +67,7 @@ public class DeliveryBoxController extends BaseController {
 
         deliveryBoxService.updateByPrimaryKeySelective(deliveryDate, boxId, statusId);
         List<DeliveryBoxBean> deliveryBoxList = new ArrayList<>();
-        deliveryBoxList = deliveryBoxService.getAllDeliveryBoxs(null);
+        deliveryBoxList = deliveryBoxService.getAllDeliveryBoxs(statusId);
         return setModelAndView("DeliveryBoxList", "deliveryBoxList", deliveryBoxList);
     }
 
