@@ -56,7 +56,7 @@ public class DeliveryBoxController extends BaseController {
         List<DeliveryBoxDetailBean> deliveryBoxDetailList = new ArrayList<>();
         deliveryBoxDetailList = deliveryBoxService.getDeliveryDetails(deliveryDate, boxId,
                 Integer.parseInt(expressFeeJpn), contentWeight);
-        return setModelAndView("DeliveryBoxDetailList", "deliveryBoxList", deliveryBoxDetailList);
+        return setModelAndView("DeliveryBoxDetailList", "deliveryBoxDetailList", deliveryBoxDetailList);
     }
 
     /**
