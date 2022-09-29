@@ -72,12 +72,7 @@ public class DeliveryBoxController extends BaseController {
         deliveryBoxService.updateByPrimaryKeySelective(deliveryDate, boxId, statusId);
         List<DeliveryBoxBean> deliveryBoxList = new ArrayList<>();
         deliveryBoxList = deliveryBoxService.getAllDeliveryBoxs(null);
-        // 获取详细内容
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("deliveryBoxList", deliveryBoxList);
-        // html
-        modelAndView.setViewName("DeliveryBoxList");
-        return modelAndView;
+        return setModelAndView("DeliveryBoxList", "deliveryBoxList", deliveryBoxList);
     }
 
     private ModelAndView setModelAndView(String viewName, String attributeName, Object attributeValue){
