@@ -20,6 +20,12 @@ public class DeliveryBoxController extends BaseController {
     @Autowired
     private DeliveryBoxService deliveryBoxService;
 
+    /**
+     * 发货商品一览
+     * 
+     * @param statusId
+     * @return
+     */
     @GetMapping("/getDeliveryBoxs")
     public ModelAndView getDeliveryBoxs(
         @RequestParam(name = "statusId") String statusId
@@ -29,6 +35,14 @@ public class DeliveryBoxController extends BaseController {
         return setModelAndView("DeliveryBoxList", "deliveryBoxList", deliveryBoxList);
     }
 
+    /**
+     * 发货商品详细
+     * 
+     * @param deliveryDate
+     * @param boxId
+     * @param expressFeeJpn
+     * @return
+     */
     @GetMapping("/getDeliveryBoxDetails")
     public ModelAndView getDeliveryBoxDetails(
             @RequestParam(name = "deliveryDate") String deliveryDate,
@@ -45,6 +59,11 @@ public class DeliveryBoxController extends BaseController {
         return setModelAndView("DeliveryBoxDetailList", "deliveryBoxList", deliveryBoxDetailList);
     }
 
+    /**
+     * 在途商品一览
+     * 
+     * @return
+     */
     @GetMapping("/getDeliveryProducts")
     public ModelAndView getDeliveryProducts() {
 
@@ -58,7 +77,14 @@ public class DeliveryBoxController extends BaseController {
         return setModelAndView("DeliveryProductList", "deliveryProductList", deliveryProductList);
     }
 
-    
+    /**
+     * 更新发货状态
+     * 
+     * @param deliveryDate
+     * @param boxId
+     * @param statusId
+     * @return
+     */
     @GetMapping("/UpdateDeliveryBoxStatus")
     public ModelAndView UpdateDeliveryBoxStatus(
         @RequestParam(name = "deliveryDate") String deliveryDate,
@@ -71,6 +97,14 @@ public class DeliveryBoxController extends BaseController {
         return setModelAndView("DeliveryBoxList", "deliveryBoxList", deliveryBoxList);
     }
 
+    /**
+     * 设置返回页面
+     * 
+     * @param viewName
+     * @param attributeName
+     * @param attributeValue
+     * @return
+     */
     private ModelAndView setModelAndView(String viewName, String attributeName, Object attributeValue){
         // 获取详细内容
         ModelAndView modelAndView = new ModelAndView();
