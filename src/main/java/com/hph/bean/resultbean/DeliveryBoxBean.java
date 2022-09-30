@@ -131,7 +131,7 @@ public class DeliveryBoxBean {
         return deliveryArrivalDate;
     }
 
-    public void setDeliveryArrivalDate(Date deliveryTicketPhoto) {
+    public void setDeliveryArrivalDate(Date deliveryArrivalDate) {
         this.deliveryArrivalDate = deliveryArrivalDate;
     }
 }
