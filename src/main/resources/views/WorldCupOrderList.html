@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>2022卡塔尔世界杯娱乐单</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript"  th:inline="javascript">
+	</script>
+</head>
+<body>
+    
+    <div align="center">
+        <p>卡塔尔世界杯娱乐单</p>
+        <table border="1">
+            <tr>
+                <th>订单号</th>
+                <th>赛事阶段</th>
+                <th>下单者</th>
+                <th>球队</th>
+                <th>受让</th>
+                <th>盘口</th>
+                <th>赔率</th>
+                <th>金额</th>
+                <th>订单状态</th>
+                <th>结果</th>
+            </tr>
+            <tr th:each="worldCupOrder:${worldCupOrderList}">
+                <td th:text="${worldCupOrder.orderId}"></td>
+                <td th:text="${worldCupOrder.stage}"></td>
+                <td th:text="${worldCupOrder.orderName}"></td>
+                <td th:text="${worldCupOrder.team}"></td>
+                <td th:text="${worldCupOrder.rs}"></td>
+                <td th:text="${worldCupOrder.handicap}"></td>
+                <td th:text="${worldCupOrder.odds}"></td>
+                <td th:text="${worldCupOrder.amount}"></td>
+                <td th:text="${worldCupOrder.status}"></td>
+                <td th:text="${worldCupOrder.result}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
