@@ -9,6 +9,7 @@ import com.hph.service.WorldCupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
@@ -18,15 +19,18 @@ public class WorldCupController extends BaseController {
     private WorldCupService worldCupService;
 
     /**
-     * 发货商品一览
+     * 订单一览
      * 
-     * @param statusId
+     * @param orderName
      * @return
      */
     @GetMapping("/getWorldCupOrder")
-    public ModelAndView getWcOrder() {
+    public ModelAndView getWcOrder(
+        @RequestParam(name = "orderName") String orderName,
+        @RequestParam(name = "orderStatus") String orderStatus
+    ) {
         List<WorldCupOrderBean> worldCupOrderList = new ArrayList<>();
-        worldCupOrderList = worldCupService.getWorldCupOrders();
+        worldCupOrderList = worldCupService.getWorldCupOrders(orderName, orderStatus);
         return setModelAndView("WorldCupOrderList", "worldCupOrderList", worldCupOrderList);
     }
 

@@ -4,12 +4,38 @@
     <title>2022卡塔尔世界杯娱乐单</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <script type="text/javascript"  th:inline="javascript">
+        function doSearch(){
+            var link = /*[[@{/getWorldCupOrder}]]*/
+            link = link+"?orderName=" + document.formOrder.orderName.value
+                + "&orderStatus=" + document.formOrder.orderStatus.value;
+            location.href=link;
+        }
 	</script>
 </head>
 <body>
-    
+<form name="formOrder">
     <div align="center">
         <p>卡塔尔世界杯娱乐单</p>
+        <select name="orderName">
+            <option value="">所有人</option>
+            <option value="00001">甘</option>
+            <option value="00002">吴</option>
+            <option value="00003">王毅</option>
+            <option value="00004">王晟</option>
+            <option value="00005">王航</option>            
+            <option value="00006">周</option>
+            <option value="00007">沈</option>
+            <option value="00008">丁</option>
+            <option value="00009">邓</option>
+        </select>
+        <select name="orderStatus">
+            <option value="">全部</option>
+            <option value="0">确认中</option>
+            <option value="1">下单完成</option>
+            <option value="2">结账中</option>
+            <option value="3">结束</option>
+        </select>
+        <input type="button" value="查询" onclick="javascript:doSearch()">
         <table border="1">
             <tr>
                 <th>订单号</th>
@@ -37,5 +63,6 @@
             </tr>
         </table>
     </div>
+</form>
 </body>
 </html>

@@ -5,7 +5,7 @@
     SELECT
       WO.ORDER_ID     AS orderId
     , CM1.CODE_NAME   AS STAGE
-    , WO.NAME         AS orderName
+    , WU.NAME         AS orderName
     , WO.TEAM         
     , CM3.CODE_NAME   AS RS
     , WO.HANDICAP     
@@ -14,9 +14,18 @@
     , CM2.CODE_NAME   AS STATUS
     , WO.RESULT       
     FROM WC_ORDER WO
+    LEFT JOIN WC_USER WU ON (WU.ID=WO.NAME)
     LEFT JOIN CODE_MST CM1 ON (CM1.GROUP_ID='001' AND CM1.CODE_ID=WO.CODE_ID)
     LEFT JOIN CODE_MST CM2 ON (CM2.GROUP_ID='002' AND CM2.CODE_ID=WO.STATUS)
     LEFT JOIN CODE_MST CM3 ON (CM3.GROUP_ID='003' AND CM3.CODE_ID=WO.RS)
+    <where> 1=1
+      <if test="orderName != ''">
+        <![CDATA[ AND WO.NAME = '${orderName}']]>
+      </if>
+      <if test="orderStatus != ''">
+        <![CDATA[ AND WO.STATUS='${orderStatus}']]>
+      </if>
     ORDER BY WO.ORDER_ID
+    </where>
   </select>
 </mapper>
