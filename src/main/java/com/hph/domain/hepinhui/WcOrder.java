@@ -1,6 +1,7 @@
 package com.hph.domain.hepinhui;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class WcOrder {
     private String orderId;
@@ -24,6 +25,10 @@ public class WcOrder {
     private String rs;
 
     private BigDecimal result;
+
+    private Date orderTime;
+
+    private Date confirmTime;
 
     public String getOrderId() {
         return orderId;
@@ -111,5 +116,21 @@ public class WcOrder {
 
     public void setResult(BigDecimal result) {
         this.result = result;
+    }
+
+    public Date getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
+    }
+
+    public Date getConfirmTime() {
+        return confirmTime;
+    }
+
+    public void setConfirmTime(Date confirmTime) {
+        this.confirmTime = confirmTime;
     }
 }

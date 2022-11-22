@@ -13,9 +13,12 @@
     <result column="handicap" jdbcType="VARCHAR" property="handicap" />
     <result column="rs" jdbcType="VARCHAR" property="rs" />
     <result column="result" jdbcType="NUMERIC" property="result" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="confirm_time" jdbcType="TIMESTAMP" property="confirmTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    order_id, group_id, code_id, name, team, odds, amount, status, handicap, rs, result
+    order_id, group_id, code_id, name, team, odds, amount, status, handicap, rs, result, 
+    order_time, confirm_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -34,11 +37,13 @@
     insert into hepinhui.wc_order (order_id, group_id, code_id, 
       name, team, odds, amount, 
       status, handicap, rs, 
-      result)
+      result, order_time, confirm_time
+      )
     values (#{orderId,jdbcType=CHAR}, #{groupId,jdbcType=CHAR}, #{codeId,jdbcType=CHAR}, 
       #{name,jdbcType=CHAR}, #{team,jdbcType=CHAR}, #{odds,jdbcType=NUMERIC}, #{amount,jdbcType=NUMERIC}, 
       #{status,jdbcType=CHAR}, #{handicap,jdbcType=VARCHAR}, #{rs,jdbcType=VARCHAR}, 
-      #{result,jdbcType=NUMERIC})
+      #{result,jdbcType=NUMERIC}, now(), now()
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.hph.domain.hepinhui.WcOrder">
     insert into hepinhui.wc_order
@@ -76,6 +81,12 @@
       <if test="result != null">
         result,
       </if>
+      <if test="orderTime != null">
+        order_time,
+      </if>
+      <if test="confirmTime != null">
+        confirm_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
@@ -110,6 +121,12 @@
       </if>
       <if test="result != null">
         #{result,jdbcType=NUMERIC},
+      </if>
+      <if test="orderTime != null">
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmTime != null">
+        #{confirmTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -146,6 +163,12 @@
       <if test="result != null">
         result = #{result,jdbcType=NUMERIC},
       </if>
+      <if test="orderTime != null">
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmTime != null">
+        confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where order_id = #{orderId,jdbcType=CHAR}
   </update>
@@ -160,7 +183,9 @@
       status = #{status,jdbcType=CHAR},
       handicap = #{handicap,jdbcType=VARCHAR},
       rs = #{rs,jdbcType=VARCHAR},
-      result = #{result,jdbcType=NUMERIC}
+      result = #{result,jdbcType=NUMERIC},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      confirm_time = #{confirmTime,jdbcType=TIMESTAMP}
     where order_id = #{orderId,jdbcType=CHAR}
   </update>
 </mapper>
