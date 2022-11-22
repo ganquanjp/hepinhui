@@ -18,6 +18,17 @@ public class WorldCupController extends BaseController {
     @Autowired
     private WorldCupService worldCupService;
 
+        /**
+     * 订单一览
+     * 
+     * @param orderName
+     * @return
+     */
+    @GetMapping("/worldcup")
+    public ModelAndView getWcOrder() {
+        return setModelAndView("WorldCup", "", null);
+    }
+
     /**
      * 订单一览
      * 
@@ -27,10 +38,11 @@ public class WorldCupController extends BaseController {
     @GetMapping("/getWorldCupOrder")
     public ModelAndView getWcOrder(
         @RequestParam(name = "orderName") String orderName,
-        @RequestParam(name = "orderStatus") String orderStatus
+        @RequestParam(name = "orderStatus") String orderStatus,
+        @RequestParam(name = "stageId") String stageId
     ) {
         List<WorldCupOrderBean> worldCupOrderList = new ArrayList<>();
-        worldCupOrderList = worldCupService.getWorldCupOrders(orderName, orderStatus);
+        worldCupOrderList = worldCupService.getWorldCupOrders(orderName, orderStatus, stageId);
         return setModelAndView("WorldCupOrderList", "worldCupOrderList", worldCupOrderList);
     }
 

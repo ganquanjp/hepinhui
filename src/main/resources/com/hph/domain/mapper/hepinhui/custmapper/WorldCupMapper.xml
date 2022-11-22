@@ -25,6 +25,9 @@
       <if test="orderStatus != ''">
         <![CDATA[ AND WO.STATUS='${orderStatus}']]>
       </if>
+      <if test="stageId != ''">
+        <![CDATA[ AND WO.CODE_ID='${stageId}']]>
+      </if>
     ORDER BY WO.ORDER_ID
     </where>
   </select>

@@ -16,10 +16,11 @@ public class WorldCupService {
     @Autowired
     WorldCupMapper worldCupMapper;
 
-    public List<WorldCupOrderBean> getWorldCupOrders(String orderName, String orderStatus) {
+    public List<WorldCupOrderBean> getWorldCupOrders(String orderName, String orderStatus, String stageId) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("orderName", orderName);
         params.put("orderStatus", orderStatus);
+        params.put("stageId", stageId);
         return worldCupMapper.selectAllOrders(params);
     }
 
