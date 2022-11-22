@@ -12,7 +12,9 @@
     , WO.ODDS         
     , WO.AMOUNT       
     , CM2.CODE_NAME   AS STATUS
-    , WO.RESULT       
+    , WO.RESULT
+    , TO_CHAR(WO.ORDER_TIME, 'yyyy-MM-dd hh24:mi')   AS orderTime
+    , '' AS confirmTime      
     FROM WC_ORDER WO
     LEFT JOIN WC_USER WU ON (WU.ID=WO.NAME)
     LEFT JOIN CODE_MST CM1 ON (CM1.GROUP_ID='001' AND CM1.CODE_ID=WO.CODE_ID)
