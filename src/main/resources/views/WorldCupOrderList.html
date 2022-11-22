@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <script type="text/javascript"  th:inline="javascript">
         function doSearch(){
-            var link = /*[[@{/getWorldCupOrder}]]*/
+            var link = /*[[@{/getWorldCupOrderList}]]*/
             link = link+"?orderName=" + document.formOrder.orderName.value
                 + "&orderStatus=" + document.formOrder.orderStatus.value
                 + "&stageId=" + document.formOrder.stageId.value;
@@ -17,6 +17,8 @@
 <form name="formOrder">
     <div align="center">
         <p>卡塔尔世界杯娱乐单</p>
+        <a href="/hph-dev/worldcup">回主菜单</a>
+        <br>
         <select name="orderName">
             <option value="">所有人</option>
             <option value="00001">甘</option>
