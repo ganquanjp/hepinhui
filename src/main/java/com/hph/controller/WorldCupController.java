@@ -1,6 +1,7 @@
 package com.hph.controller;
 
 import java.io.Console;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,13 +47,36 @@ public class WorldCupController extends BaseController {
         @RequestParam(name = "orderStatus") String orderStatus,
         @RequestParam(name = "stageId") String stageId
     ) {
-        List<WorldCupOrderBean> worldCupOrderList = new ArrayList<>();
-        worldCupOrderList = worldCupService.getWorldCupOrders(orderName, orderStatus, stageId);
-        return setModelAndView("WorldCupOrderList", "worldCupOrderList", worldCupOrderList);
+        return setModelAndView(
+              "WorldCupOrderList"
+            , "worldCupOrderList"
+            , getWorldCupOrderList(
+                      orderName
+                    , orderStatus
+                    , stageId
+                )
+            );
     }
-
+   /**
+     * 确认中订单一览
+     * 
+     * @param orderName
+     * @return
+     */
+    @GetMapping("/getWorldCupConfirmList")
+    public ModelAndView getWcConfirmList() {
+        return setModelAndView(
+              "WorldCupConfirmList"
+            , "worldCupOrderList"
+            , getWorldCupOrderList(
+                      ""
+                    , "0"
+                    , ""
+                )
+            );
+    }
     /**
-     * 下单画面
+     * 转到下单画面
      * 
      * @param orderName
      * @return
@@ -62,20 +86,61 @@ public class WorldCupController extends BaseController {
         return setModelAndView("WorldCupOrder", "", null);
     }
 
-        /**
+    /**
      * 下单画面
      * 
      * @param orderName
      * @return
      */
-    @RequestMapping(value="/ConfirmWorldCupOrder", method=RequestMethod.POST)
-    public ModelAndView confirmWorldCupOrder(
+    @RequestMapping(value="/NewWorldCupOrder", method=RequestMethod.POST)
+    public ModelAndView newWorldCupOrder(
         @ModelAttribute WorldCupOrderBean worldCupOrderBean, Model model
     ) {
         worldCupService.newOrder(worldCupOrderBean);
+        return setModelAndView(
+              "WorldCupOrderList"
+            , "worldCupOrderList"
+            , getWorldCupOrderList(
+                      worldCupOrderBean.getOrderName()
+                    , ""
+                    , worldCupOrderBean.getStage()
+                )
+            );
+    }
+
+   /**
+     * 订单确认更新
+     * 
+     * @return
+     */
+    @GetMapping("/ConfirmUpdate")
+    public ModelAndView ConfirmUpdate(
+        @RequestParam(name = "orderId") String orderId,
+        @RequestParam(name = "odds") String odds
+    ) {
+        WorldCupOrderBean worldCupOrderBean = new WorldCupOrderBean();
+        worldCupOrderBean.setOrderId(orderId);
+        worldCupOrderBean.setOdds(new BigDecimal(odds));
+        worldCupService.confirmOrder(worldCupOrderBean);
+        return setModelAndView(
+              "WorldCupOrderList"
+            , "worldCupOrderList"
+            , getWorldCupOrderList(
+                      worldCupOrderBean.getOrderName()
+                    , ""
+                    , worldCupOrderBean.getStage()
+                )
+            );
+    }
+    /**
+     * 订单一览取得
+     * 
+     * @return
+     */
+    private List<WorldCupOrderBean> getWorldCupOrderList(String orderName, String orderStatus, String stage){
         List<WorldCupOrderBean> worldCupOrderList = new ArrayList<>();
-        worldCupOrderList = worldCupService.getWorldCupOrders(worldCupOrderBean.getOrderName(), "", worldCupOrderBean.getStage());
-        return setModelAndView("WorldCupOrderList", "worldCupOrderList", worldCupOrderList);
+        worldCupOrderList = worldCupService.getWorldCupOrders(orderName, orderStatus, stage);
+        return worldCupOrderList;
     }
 
     /**

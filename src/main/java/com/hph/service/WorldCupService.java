@@ -42,4 +42,12 @@ public class WorldCupService {
         wcOrder.setRs(orderBean.getRs());
         wcOrderMapper.insert(wcOrder);
     }
+
+    public void confirmOrder(WorldCupOrderBean orderBean){
+        WcOrder wcOrder = new WcOrder();
+        wcOrder.setOrderId(orderBean.getOrderId());
+        wcOrder.setOdds(orderBean.getOdds());
+        wcOrder.setStatus("1");
+        wcOrderMapper.updateByPrimaryKey(wcOrder);
+    }
 }

@@ -125,9 +125,7 @@
       <if test="orderTime != null">
         #{orderTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="confirmTime != null">
-        #{confirmTime,jdbcType=TIMESTAMP},
-      </if>
+      now()
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.hph.domain.hepinhui.WcOrder">
