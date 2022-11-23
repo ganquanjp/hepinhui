@@ -29,25 +29,15 @@ public class WorldCupService {
         return worldCupMapper.selectAllOrders(params);
     }
 
-    public void newOrder(WorldCupOrderBean orderBean){
-        WcOrder wcOrder = new WcOrder();
-        wcOrder.setGroupId("001");
-        wcOrder.setCodeId(orderBean.getStage());
-        wcOrder.setName(orderBean.getOrderName());
-        wcOrder.setTeam(orderBean.getTeam());
-        wcOrder.setOdds(orderBean.getOdds());
-        wcOrder.setAmount(orderBean.getAmount());
-        wcOrder.setStatus("0");
-        wcOrder.setHandicap(orderBean.getHandicap());
-        wcOrder.setRs(orderBean.getRs());
+    public void newOrder(WcOrder wcOrder){
         wcOrderMapper.insert(wcOrder);
     }
 
-    public void confirmOrder(WorldCupOrderBean orderBean){
-        WcOrder wcOrder = new WcOrder();
-        wcOrder.setOrderId(orderBean.getOrderId());
-        wcOrder.setOdds(orderBean.getOdds());
-        wcOrder.setStatus("1");
-        wcOrderMapper.updateByPrimaryKey(wcOrder);
+    public WcOrder selectOrder(String orderId){
+        return wcOrderMapper.selectByPrimaryKey(orderId);
+    }
+
+    public void confirmOrder(WcOrder wcOrder){
+        wcOrderMapper.updateByPrimaryKeySelective(wcOrder);
     }
 }

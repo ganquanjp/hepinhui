@@ -10,11 +10,10 @@
         th{background-color:rgba(98, 185, 64, 0.438);}
     </style>
     <script type="text/javascript"  th:inline="javascript">
-        function doSubmit(orderId, odds){
-            document.formOrder.action="/hph-dev/ConfirmUpdate?orderId=" + orderId
-            + "&odds=" + odds;
-            alert(document.formOrder.action);
-            document.formOrder.submit();
+        function doSubmit(orderId){
+            var link = /*[[@{/ConfirmOrder}]]*/
+            link = link + "?orderId=" + orderId;
+            location.href=link;
         }
 	</script>
 </head>
@@ -45,11 +44,11 @@
                 <td th:text="${worldCupOrder.team}"></td>
                 <td th:text="${worldCupOrder.rs}"></td>
                 <td th:text="${worldCupOrder.handicap}"></td>
-                <td><input type="text" th:name="odds_${worldCupOrder.orderId}" th:value="${worldCupOrder.odds}"></td>
+                <td th:text="${worldCupOrder.odds}"></td>
                 <td th:text="${worldCupOrder.amount}"></td>
                 <td th:text="${worldCupOrder.status}"></td>
                 <td th:text="${worldCupOrder.orderTime}"></td>
-                <td><input type="button" value="确认" th:onclick="|doSubmit('__${worldCupOrder.orderId}__','__${worldCupOrder.odds}__')|"></td>
+                <td><input type="button" value="确认" th:onclick="|doSubmit('__${worldCupOrder.orderId}__')|"></td>
             </tr>
         </table>
     </div>

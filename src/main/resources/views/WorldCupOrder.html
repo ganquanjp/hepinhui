@@ -8,7 +8,7 @@
 
 </head>
 <body>
-<form name="formOrder" th:action="@{/NewWorldCupOrder}" th:object="${WorldCupOrderBean}" method="post">
+<form name="formOrder" th:action="@{/NewWorldCupOrder}" th:object="${WcOrder}" method="post">
     <div align="center">
         <p>卡塔尔世界杯娱乐单</p>
         <a href="/hph-dev/worldcup">回主菜单</a>
@@ -16,7 +16,7 @@
         <table>
             <tr><td>姓名</td>
                 <td>
-                    <select name="orderName">
+                    <select name="name">
                         <option value="00001">甘</option>
                         <option value="00002">吴</option>
                         <option value="00003">王毅</option>
@@ -34,7 +34,7 @@
             </tr>
             <tr><td>赛事阶段</td>
                 <td>
-                    <select name="stage">
+                    <select name="codeId">
                         <option value="001">冠军</option>
                         <option value="002">冠军归属</option>
                         <option value="003">晋级决赛</option>

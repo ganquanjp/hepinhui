@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hph.bean.resultbean.WorldCupOrderBean;
+import com.hph.domain.hepinhui.WcOrder;
 import com.hph.service.WorldCupService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,51 +88,69 @@ public class WorldCupController extends BaseController {
     }
 
     /**
-     * 下单画面
+     * 新订单生成
      * 
      * @param orderName
      * @return
      */
     @RequestMapping(value="/NewWorldCupOrder", method=RequestMethod.POST)
     public ModelAndView newWorldCupOrder(
-        @ModelAttribute WorldCupOrderBean worldCupOrderBean, Model model
+        @ModelAttribute WcOrder wcOrder, Model model
     ) {
-        worldCupService.newOrder(worldCupOrderBean);
+        wcOrder.setGroupId("001");
+        wcOrder.setStatus("0");
+        worldCupService.newOrder(wcOrder);
         return setModelAndView(
               "WorldCupOrderList"
             , "worldCupOrderList"
             , getWorldCupOrderList(
-                      worldCupOrderBean.getOrderName()
+                      wcOrder.getName()
                     , ""
-                    , worldCupOrderBean.getStage()
+                    , wcOrder.getCodeId()
                 )
             );
     }
 
    /**
+     * 订单确认
+     * 
+     * @return
+     */
+    @GetMapping("/ConfirmOrder")
+    public ModelAndView ConfirmOrder(
+        @RequestParam(name = "orderId") String orderId
+    ) {
+        WcOrder wcOrder = worldCupService.selectOrder(orderId);
+        return setModelAndView(
+              "WorldCupConfirmOrder"
+            , "wcOrder"
+            , wcOrder
+            );
+    }
+
+  /**
      * 订单确认更新
      * 
      * @return
      */
-    @GetMapping("/ConfirmUpdate")
-    public ModelAndView ConfirmUpdate(
-        @RequestParam(name = "orderId") String orderId,
-        @RequestParam(name = "odds") String odds
+    @GetMapping("/DoConfirm")
+    @RequestMapping(value="/DoConfirm", method=RequestMethod.POST)
+    public ModelAndView doConfirm(
+        @ModelAttribute WcOrder wcOrder, Model model
     ) {
-        WorldCupOrderBean worldCupOrderBean = new WorldCupOrderBean();
-        worldCupOrderBean.setOrderId(orderId);
-        worldCupOrderBean.setOdds(new BigDecimal(odds));
-        worldCupService.confirmOrder(worldCupOrderBean);
+        wcOrder.setStatus("1");
+        worldCupService.confirmOrder(wcOrder);
         return setModelAndView(
-              "WorldCupOrderList"
+              "WorldCupConfirmList"
             , "worldCupOrderList"
             , getWorldCupOrderList(
-                      worldCupOrderBean.getOrderName()
-                    , ""
-                    , worldCupOrderBean.getStage()
+                      wcOrder.getName()
+                    , "0"
+                    , wcOrder.getCodeId()
                 )
             );
     }
+
     /**
      * 订单一览取得
      * 
