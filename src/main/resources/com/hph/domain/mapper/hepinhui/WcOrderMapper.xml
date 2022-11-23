@@ -42,7 +42,7 @@
     values (#{orderId,jdbcType=CHAR}, #{groupId,jdbcType=CHAR}, #{codeId,jdbcType=CHAR}, 
       #{name,jdbcType=CHAR}, #{team,jdbcType=CHAR}, #{odds,jdbcType=NUMERIC}, #{amount,jdbcType=NUMERIC}, 
       #{status,jdbcType=CHAR}, #{handicap,jdbcType=VARCHAR}, #{rs,jdbcType=VARCHAR}, 
-      #{result,jdbcType=NUMERIC}, now(), now()
+      #{result,jdbcType=NUMERIC}, now(), null
       )
   </insert>
   <insert id="insertSelective" parameterType="com.hph.domain.hepinhui.WcOrder">
