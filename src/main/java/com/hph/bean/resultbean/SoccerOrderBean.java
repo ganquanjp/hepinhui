@@ -1,8 +1,7 @@
 package com.hph.bean.resultbean;
 
 import java.math.BigDecimal;
-import java.util.Date;
-public class WorldCupOrderBean {
+public class SoccerOrderBean {
 
     private String orderId;
 
@@ -22,7 +21,7 @@ public class WorldCupOrderBean {
 
     private String status;
 
-    private String result;
+    private BigDecimal result;
 
     private String orderTime;
 
@@ -100,11 +99,11 @@ public class WorldCupOrderBean {
         this.status = status;
     }
 
-    public String getResult() {
+    public BigDecimal getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(BigDecimal result) {
         this.result = result;
     }
 

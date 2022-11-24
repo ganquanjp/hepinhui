@@ -11,17 +11,17 @@
     </style>
     <script type="text/javascript"  th:inline="javascript">
         function doSubmit(orderId){
-            var link = /*[[@{/ConfirmOrder}]]*/
+            var link = /*[[@{/confirmorder}]]*/
             link = link + "?orderId=" + orderId;
             location.href=link;
         }
 	</script>
 </head>
 <body>
-    <form name="formOrder" th:object="${WorldCupOrderBean}">
+    <form name="formOrder" th:object="${SoccerOrderBean}">
     <div align="center">
         <p>卡塔尔世界杯娱乐单</p>
-        <a href="/hph-dev/worldcup">回主菜单</a>
+        <a href="/hph-dev/socceradmin">回主菜单</a>
         <br>
         <table style="border-collapse: collapse" border="1" >
             <tr>
@@ -37,18 +37,18 @@
                 <th>下单时间</th>
                 <th></th>
             </tr>
-            <tr th:each="worldCupOrder:${worldCupOrderList}">
-                <td th:text="${worldCupOrder.orderId}"></td>
-                <td th:text="${worldCupOrder.stage}"></td>
-                <td th:text="${worldCupOrder.orderName}"></td>
-                <td th:text="${worldCupOrder.team}"></td>
-                <td th:text="${worldCupOrder.rs}"></td>
-                <td th:text="${worldCupOrder.handicap}"></td>
-                <td th:text="${worldCupOrder.odds}"></td>
-                <td th:text="${worldCupOrder.amount}"></td>
-                <td th:text="${worldCupOrder.status}"></td>
-                <td th:text="${worldCupOrder.orderTime}"></td>
-                <td><input type="button" value="确认" th:onclick="|doSubmit('__${worldCupOrder.orderId}__')|"></td>
+            <tr th:each="soccerOrder:${soccerOrderList}">
+                <td th:text="${soccerOrder.orderId}"></td>
+                <td th:text="${soccerOrder.stage}"></td>
+                <td th:text="${soccerOrder.orderName}"></td>
+                <td th:text="${soccerOrder.team}"></td>
+                <td th:text="${soccerOrder.rs}"></td>
+                <td th:text="${soccerOrder.handicap}"></td>
+                <td th:text="${soccerOrder.odds}"></td>
+                <td th:text="${soccerOrder.amount}"></td>
+                <td th:text="${soccerOrder.status}"></td>
+                <td th:text="${soccerOrder.orderTime}"></td>
+                <td><input type="button" value="确认" th:onclick="|doSubmit('__${soccerOrder.orderId}__')|"></td>
             </tr>
         </table>
     </div>

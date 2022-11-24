@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hph.domain.mapper.hepinhui.custmapper.WorldCupMapper">
-  <select id="selectAllOrders" parameterType="java.util.Map" resultType="com.hph.bean.resultbean.WorldCupOrderBean">
+<mapper namespace="com.hph.domain.mapper.hepinhui.custmapper.SoccerMapper">
+  <select id="selectAllOrders" parameterType="java.util.Map" resultType="com.hph.bean.resultbean.SoccerOrderBean">
     SELECT
       WO.ORDER_ID     AS orderId
     , CM1.CODE_NAME   AS STAGE
@@ -12,7 +12,7 @@
     , WO.ODDS         
     , WO.AMOUNT       
     , CM2.CODE_NAME   AS STATUS
-    , WO.RESULT
+    , coalesce(WO.RESULT, 0) AS RESULT
     , TO_CHAR(WO.ORDER_TIME, 'yyyy-MM-dd hh24:mi') AS orderTime
     , TO_CHAR(WO.CONFIRM_TIME, 'yyyy-MM-dd hh24:mi') AS confirmTime      
     FROM WC_ORDER WO

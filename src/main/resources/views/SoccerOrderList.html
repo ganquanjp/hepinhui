@@ -11,7 +11,7 @@
     </style>
     <script type="text/javascript"  th:inline="javascript">
         function doSearch(){
-            var link = /*[[@{/getWorldCupOrderList}]]*/
+            var link = /*[[@{/soccerorderlist}]]*/
             link = link+"?orderName=" + document.formOrder.orderName.value
                 + "&orderStatus=" + document.formOrder.orderStatus.value
                 + "&stageId=" + document.formOrder.stageId.value;
@@ -23,7 +23,7 @@
 <form name="formOrder">
     <div align="center">
         <p>卡塔尔世界杯娱乐单</p>
-        <a href="/hph-dev/worldcup">回主菜单</a>
+        <a href="/hph-dev/soccer">回主菜单</a>
         <br>
         <select name="orderName">
             <option value="">所有人</option>
@@ -72,19 +72,25 @@
                 <th>确认时间</th>
                 <th>结果</th>
             </tr>
-            <tr th:each="worldCupOrder:${worldCupOrderList}">
-                <td th:text="${worldCupOrder.orderId}"></td>
-                <td th:text="${worldCupOrder.stage}"></td>
-                <td th:text="${worldCupOrder.orderName}"></td>
-                <td th:text="${worldCupOrder.team}"></td>
-                <td th:text="${worldCupOrder.rs}"></td>
-                <td th:text="${worldCupOrder.handicap}"></td>
-                <td th:text="${worldCupOrder.odds}"></td>
-                <td th:text="${worldCupOrder.amount}"></td>
-                <td th:text="${worldCupOrder.status}"></td>
-                <td th:text="${worldCupOrder.orderTime}"></td>
-                <td th:text="${worldCupOrder.confirmTime}"></td>
-                <td th:text="${worldCupOrder.result}"></td>
+            <tr th:each="soccerOrder:${soccerOrderList}">
+                <td th:text="${soccerOrder.orderId}"></td>
+                <td th:text="${soccerOrder.stage}"></td>
+                <td th:text="${soccerOrder.orderName}"></td>
+                <td th:text="${soccerOrder.team}"></td>
+                <td th:text="${soccerOrder.rs}"></td>
+                <td th:text="${soccerOrder.handicap}"></td>
+                <td th:text="${soccerOrder.odds}"></td>
+                <td th:text="${soccerOrder.amount}"></td>
+                <td th:text="${soccerOrder.status}"></td>
+                <td th:text="${soccerOrder.orderTime}"></td>
+                <td th:text="${soccerOrder.confirmTime}"></td>
+                <td th:text="${soccerOrder.result}"></td>
+            </tr>
+            <tr>
+                <td colspan="7"></td>
+                <td><b th:text="${#aggregates.sum(soccerOrderList.![amount])}" /></td>
+                <td colspan="3"></td>
+                <td><b th:text="${#aggregates.sum(soccerOrderList.![result])}" /></td>
             </tr>
         </table>
     </div>
