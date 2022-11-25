@@ -77,7 +77,7 @@ public class SoccerAdminController extends BaseController {
      * 
      * @return
      */
-    @RequestMapping(value="/adminconfirmorder", method=RequestMethod.POST)
+    @RequestMapping(value="/socceradminconfirm", method=RequestMethod.POST)
     public ModelAndView confirmOrder(
         @ModelAttribute WcOrder wcOrder, Model model
     ) {

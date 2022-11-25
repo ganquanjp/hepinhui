@@ -3,18 +3,33 @@
 <head>
     <title>2022卡塔尔世界杯娱乐单</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        input{
+            width:230px;
+            height:30px;
+            font-size: 20px;
+        }
+        select{
+            width:238px;
+            height:38px;
+            font-size: 20px;
+        }
+        th{
+            background-color:#40E0D0;
+        }
+    </style>
     <script type="text/javascript"  th:inline="javascript">
 	</script>
 
 </head>
 <body>
-<form name="formOrder" th:action="@{/newsoccerorder}" th:object="${WcOrder}" method="post">
+<form name="formOrder" th:object="${WcOrder}" method="post">
     <div align="center">
         <p>卡塔尔世界杯娱乐单</p>
         <a href="/hph-dev/soccer">回主菜单</a>
         <br>
         <table>
-            <tr><td>姓名</td>
+            <tr><th>姓名</th>
                 <td>
                     <select name="name">
                         <option value="00001">甘</option>
@@ -32,7 +47,7 @@
                     </select>
                 </td>
             </tr>
-            <tr><td>赛事阶段</td>
+            <tr><th>赛事阶段</th>
                 <td>
                     <select name="codeId">
                         <option value="001">冠军</option>
@@ -44,12 +59,12 @@
                     </select>
                 </td>
             </tr>
-            <tr><td>国家</td>
+            <tr><th>国家</th>
                 <td>
                     <input type="text" name="team" value="">
                 </td>
             </tr>
-            <tr><td>让受</td>
+            <tr><th>让受</th>
                 <td>
                     <select name="rs">
                         <option value="0">让</option>
@@ -58,24 +73,25 @@
                     </select>
                 </td>
             </tr>
-            <tr><td>盘口</td>
+            <tr><th>盘口</th>
                 <td>
                     <input type="text" name="handicap" value="">
                 </td>
             </tr>
-            <tr><td>赔率</td>
+            <tr><th>赔率</th>
                 <td>
                     <input type="text" name="odds" value="">
                 </td>
             </tr>
-            <tr><td>金额</td>
+            <tr><th>金额</th>
                 <td>
                     <input type="text" name="amount" value="" placeholder="波胆最低20，其余最低50">
                 </td>
             </tr>
-            <tr><td></td>
-                <td style="text-align:right">
-                    <input type="submit" value="下单">
+            <tr></tr>
+            <tr>
+                <td colspan=2 style="text-align:center">
+                    <input type="submit" value="下单" formaction="/hph-dev/newsoccerorder" style="width:250px;height:100px;font-size: 50px">
                 </td>
             </tr>
         </table>        

@@ -10,22 +10,22 @@
         th{background-color:rgba(98, 185, 64, 0.438);}
     </style>
     <script type="text/javascript"  th:inline="javascript">
-        function doSearch(){
-            var link = /*[[@{/soccerorderlist}]]*/
-            link = link+"?orderName=" + document.formOrder.orderName.value
-                + "&orderStatus=" + document.formOrder.orderStatus.value
-                + "&stageId=" + document.formOrder.stageId.value;
-            location.href=link;
-        }
+        //function doSearch(){
+            //var link = /*[[@{/soccerorderlist}]]*/
+            //link = link+"?orderName=" + document.formOrder.orderName.value
+            //    + "&orderStatus=" + document.formOrder.orderStatus.value
+            //    + "&stageId=" + document.formOrder.stageId.value;
+            //location.href=link;
+        //}
 	</script>
 </head>
 <body>
-<form name="formOrder">
+<form name="formOrder" method="post">
     <div align="center">
         <p>卡塔尔世界杯娱乐单</p>
         <a href="/hph-dev/soccer">回主菜单</a>
         <br>
-        <select name="orderName">
+        <select style="width:120px;height:50px;font-size: 30px" name="orderName">
             <option value="">所有人</option>
             <option value="00001">甘</option>
             <option value="00002">吴</option>
@@ -40,7 +40,7 @@
             <option value="00011">孙</option>
             <option value="00012">无为</option>
         </select>
-        <select name="stageId">
+        <select style="width:100px;height:50px;font-size: 30px" name="stageId">
             <option value="">全部</option>
             <option value="001">冠军</option>
             <option value="002">冠军归属</option>
@@ -49,14 +49,18 @@
             <option value="005">晋级八强</option>
             <option value="007">小组赛</option>
         </select>
-        <select name="orderStatus">
+        <select style="width:100px;height:50px;font-size: 30px" name="orderStatus">
             <option value="">全部</option>
             <option value="0">确认中</option>
             <option value="1">下单完成</option>
             <option value="2">结账中</option>
             <option value="3">结束</option>
         </select>
-        <input type="button" value="查询" onclick="javascript:doSearch()">
+        <!--<input type="button" value="查询" onclick="javascript:doSearch()">-->
+        <button style="width:100px;height:50px;font-size: 30px" formaction="/hph-dev/soccerorderlist">
+            查询
+        </button>
+        <br><br>
         <table style="border-collapse: collapse" border="1">
             <tr>
                 <th>订单号</th>
@@ -80,17 +84,17 @@
                 <td th:text="${soccerOrder.rs}"></td>
                 <td th:text="${soccerOrder.handicap}"></td>
                 <td th:text="${soccerOrder.odds}"></td>
-                <td th:text="${soccerOrder.amount}"></td>
+                <td align="right" th:text="${soccerOrder.amount}"></td>
                 <td th:text="${soccerOrder.status}"></td>
                 <td th:text="${soccerOrder.orderTime}"></td>
                 <td th:text="${soccerOrder.confirmTime}"></td>
-                <td th:text="${soccerOrder.result}"></td>
+                <td align="right" th:text="${soccerOrder.result}"></td>
             </tr>
             <tr>
                 <td colspan="7"></td>
-                <td><b th:text="${#aggregates.sum(soccerOrderList.![amount])}" /></td>
+                <td align="right"><b th:text="${#aggregates.sum(soccerOrderList.![amount])}" /></td>
                 <td colspan="3"></td>
-                <td><b th:text="${#aggregates.sum(soccerOrderList.![result])}" /></td>
+                <td align="right"><b th:text="${#aggregates.sum(soccerOrderList.![result])}" /></td>
             </tr>
         </table>
     </div>

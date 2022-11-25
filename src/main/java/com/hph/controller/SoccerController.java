@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 public class SoccerController extends BaseController {
@@ -40,7 +41,7 @@ public class SoccerController extends BaseController {
      * @param orderName
      * @return
      */
-    @GetMapping("/soccerorderlist")
+    @PostMapping("/soccerorderlist")
     public ModelAndView gotoSoccerOrderList(
         @RequestParam(name = "orderName") String orderName,
         @RequestParam(name = "orderStatus") String orderStatus,
@@ -63,7 +64,7 @@ public class SoccerController extends BaseController {
      * @param orderName
      * @return
      */
-    @GetMapping("/soccerorder")
+    @PostMapping("/soccerorder")
     public ModelAndView gotoSoccerOrder() {
         return setModelAndView("SoccerOrder", "", null);
     }
